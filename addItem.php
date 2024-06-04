@@ -1,5 +1,6 @@
 <?php
     include("header.html");
+    include('dbConnection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +10,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h4>Add Item Inventory</h4>
+    <form action="addItem.php" method="post">
+        <label for="">Item Name</label> <br>
+        <input type="text" name="itemName"><br>
+        <label for="">Description</label> <br>
+        <input type="text" name="itemName"><br>
+        <label for="">Price</label> <br>
+        <input type="text" name="itemName"><br>
+        <button>Save</button>
+    </form>
 </body>
 </html>
