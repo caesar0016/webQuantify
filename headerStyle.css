@@ -6,7 +6,7 @@ h1{
 }
 .navBar ul{
     list-style-type: none;
-    background-color: rgb(25, 36, 138);
+    background-color: rgb(39, 56, 214);
     padding: 0px;
     margin: 0px;
     overflow: hidden;
@@ -21,7 +21,7 @@ h1{
 }
 
 .navBar a:hover{
-    background-color: antiquewhite;
+    background-color: #848583;
 }
 .navBar li{
     float: left;
