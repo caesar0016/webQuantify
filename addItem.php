@@ -10,16 +10,26 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <label for="">Item Name</label> <br>
-        <input type="text" name="itemName"><br>
-        <label for="">Description</label> <br>
-        <input type="text" name="itemDesc"><br>
-        <label for="">Price</label> <br>
-        <input type="text" name="itemPrice"><br>
-        <br>
-        <input type="submit" name="submit" value="Register">
-    </form>
+    <div class="container">
+    <div class="input-group mb-3 mt-4 itemName-input">
+        <span class="input-group-text" id="inputGroup-sizing-default">Item Name</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3 mt-4 itemName-input">
+        <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3 mt-4 itemName-input">
+        <span class="input-group-text" id="inputGroup-sizing-default">Price</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <select class="form-select itemName-input" aria-label="Default select example">
+    <option selected>Category</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+    </select>
+    </div>
 </body>
 </html>
 <?php 
