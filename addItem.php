@@ -10,6 +10,9 @@
     <title>Document</title>
 </head>
 <body>
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
     <div class="container">
     <div class="input-group mb-3 mt-4 itemName-input">
         <span class="input-group-text" id="inputGroup-sizing-default">Item Name</span>
@@ -24,12 +27,24 @@
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
     <select class="form-select itemName-input" aria-label="Default select example">
-    <option selected>Category</option>
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
+        <option selected>Category</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
     </select>
     </div>
+    </div>
+    <div class="card mt-4" style="width: 18rem;">
+  <img src="https://i.pinimg.com/564x/95/5a/f7/955af7a2d19cc3cb70abb6d3e9a4c2ed.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Insert Description</p>
+    <p class="card-text">Insert Price</p>
+  </div>
+</div>
+  </div>
+  </div>
+</div>
+    
 </body>
 </html>
 <?php 
