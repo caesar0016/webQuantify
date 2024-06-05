@@ -1,29 +1,4 @@
-header{
-    margin: 0px;
+:root {
+    --bs-primary: #007bff; /* Default primary color */
+    --bs-primary-rgb: 0, 123, 255; /* RGB value of primary color */
 }
-h1{
-    text-align: center;
-}
-.navBar ul{
-    list-style-type: none;
-    background-color: rgb(39, 56, 214);
-    padding: 0px;
-    margin: 0px;
-    overflow: hidden;
-}
-
-.navBar a{
-    color: white;
-    text-decoration: none;
-    padding: 15px;
-    display: block;
-    text-align: center;
-}
-
-.navBar a:hover{
-    background-color: #848583;
-}
-.navBar li{
-    float: left;
-}
-
