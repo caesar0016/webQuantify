@@ -27,12 +27,13 @@
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
     <select class="form-select itemName-input" aria-label="Default select example">
-        <option selected>Category</option>
+        <option selected disabled>Choose a category</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
     </select>
     </div>
+    <button type="button" class="btn btn-primary ">Save</button>
     </div>
     <div class="card mt-4" style="width: 18rem;">
   <img src="https://i.pinimg.com/564x/95/5a/f7/955af7a2d19cc3cb70abb6d3e9a4c2ed.jpg" class="card-img-top" alt="...">
@@ -44,7 +45,7 @@
   </div>
   </div>
 </div>
-    
+
 </body>
 </html>
 <?php 
