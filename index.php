@@ -1,4 +1,5 @@
 <?php
     include("header.html");
-    echo "This is the home page";
-?>
+    include("database.php");
+    echo "This is the home page <>";
+?> 
