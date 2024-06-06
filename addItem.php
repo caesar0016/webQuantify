@@ -28,9 +28,10 @@
     </div>
     <select class="form-select itemName-input" aria-label="Default select example">
         <option selected disabled>Choose a category</option>
-        <option value="1">One</option>
+        <option value="1">One</option> 
         <option value="2">Two</option>
         <option value="3">Three</option>
+        <option value="4">Four</option>
     </select>
     </div>
     <button type="button" class="btn btn-primary ">Save</button>
