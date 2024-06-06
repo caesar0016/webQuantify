@@ -10,21 +10,22 @@
     <title>Document</title>
 </head>
 <body>
-<div class="container text-center">
+    <button type="button" class="btn-close btn-close-red m-4" aria-label="Close"></button>
+<div class="container text-center p-4">
   <div class="row">
     <div class="col">
     <div class="container">
-    <div class="input-group mb-3 mt-4 itemName-input">
-        <span class="input-group-text" id="inputGroup-sizing-default">Item Name</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    <div class="input-group mb-3 mt-5 itemName-input">
+        <span class="input-group-text mt-3" id="inputGroup-sizing-default">Item Name</span>
+        <input type="text" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
     <div class="input-group mb-3 mt-4 itemName-input">
-        <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <span class="input-group-text mt-3" id="inputGroup-sizing-default">Description</span>
+        <input type="text" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
     <div class="input-group mb-3 mt-4 itemName-input">
-        <span class="input-group-text" id="inputGroup-sizing-default">Price</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <span class="input-group-text mt-3 mb-3" id="inputGroup-sizing-default">Price</span>
+        <input type="text" class="form-control mt-3 mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
     <select class="form-select itemName-input" aria-label="Default select example">
         <option selected disabled>Choose a category</option>
@@ -34,19 +35,24 @@
         <option value="4">Four</option>
     </select>
     </div>
-    <button type="button" class="btn btn-primary ">Save</button>
+    <div class="input-group mb-3 mt-4 itemName-input">
+        <div class="container">
+            <button type="button" class="btn btn-warning ml-5">Save</button>
+        </div>
     </div>
-    <div class="card mt-4" style="width: 18rem;">
-  <img src="https://i.pinimg.com/564x/95/5a/f7/955af7a2d19cc3cb70abb6d3e9a4c2ed.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
+    </div>
+    <div class="card mt-4" style="width: 20rem;">
+        <img src="https://i.pinimg.com/564x/95/5a/f7/955af7a2d19cc3cb70abb6d3e9a4c2ed.jpg" class="card-img-top mt-2" alt="...">
+        <div class="card-body">
     <p class="card-text">Insert Description</p>
     <p class="card-text">Insert Price</p>
   </div>
+  <button type="button" class="btn btn-outline-primary m-4">Add Image</button>
 </div>
   </div>
   </div>
 </div>
-
+    
 </body>
 </html>
 <?php 
