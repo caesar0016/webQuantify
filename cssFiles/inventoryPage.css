@@ -1,0 +1,4 @@
+.table-blue {
+    background-color: hwb(249 3% 42%);
+    color: white; /* Ensures text is readable on blue background */
+}
