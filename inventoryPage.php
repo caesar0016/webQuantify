@@ -19,6 +19,7 @@
   <td class="table-success">Price</td>
   <td class="table-success">Stock</td>
 
+<!-- This is for tr-->
 </tr>
 
 <!-- On tables -->
