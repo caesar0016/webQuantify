@@ -24,7 +24,7 @@
 
 <!-- On tables -->
 <table class="table-primary">Hello 1</table>
-<table class="table-primary">Hello 1</table>
+<table class="table-primary">Hello 2</table>
 <table class="table-secondary">Secondary</table>
 <table class="table-primary">Hello 1</table>
 
