@@ -34,7 +34,11 @@
                 <td class="table-secondary">Polo Male</td>
                 <td class="table-success">500 php</td>
                 <td class="table-success">250</td>
-                <td class="table-success"><img src="images/ic_edit.png" alt="Edit"></td>
+                <td class="table-success">
+                    <a href="#" class="btn" role="button">
+                        <img src="images/ic_edit.png" alt="Edit">
+                    </a>
+                </td>
             </tr>
               <!-- This is the rows 2-->
             <tr>
@@ -42,7 +46,11 @@
                 <td class="table-secondary">Polo Female</td>
                 <td class="table-success">350 php</td>
                 <td class="table-success">Out of Stock</td>
-                <td class="table-success"><img src="images/ic_edit.png" alt="Edit"></td>
+                <td class="table-success">
+                    <a href="#" class="btn" role="button">
+                        <img src="images/ic_edit.png" alt="Edit">
+                    </a>
+                </td>
             </tr>
               <!-- This is the rows 3-->
             <tr>
@@ -50,7 +58,11 @@
                 <td class="table-secondary">Male Pants</td>
                 <td class="table-success">400 php</td>
                 <td class="table-success">200</td>
-                <td class="table-success"><img src="images/ic_edit.png" alt="Edit"></td>
+                <td class="table-success">
+                    <a href="#" class="btn" role="button">
+                        <img src="images/ic_edit.png" alt="Edit">
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>
