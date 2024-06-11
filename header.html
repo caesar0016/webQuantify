@@ -1,28 +1,36 @@
 <header>
     <link rel="stylesheet" href="npm/node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="headerStyle.css">
-        <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
-            <div class="container">
-                <a href="#" class="navbar-brand"><h2>Quantify</h2></a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <form class="d-flex">
-                                <input class="form-control me-3 mt-2" type="search" placeholder="Search" name="searchInput">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <a href="index.php" class="nav-link"><h5>Home</h5></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link"><h5>Reservation</h5></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="inventoryPage.php" class="nav-link"><h5>Inventory</h5></a>
-                        </li>
+    <nav class="navbar navbar-expand-lg bg-primary">
+        <div class="container-fluid d-flex align-items-center">
+            <ul class="navbar-nav d-flex align-items-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle m-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="images/ic_category.png" alt="Category Image">
+                    </a>
+                    <ul class="dropdown-menu list-unstyled">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                </div>
-            </div>
-        </nav>
+                </li>
+            <h2 class="mb-0 ms-3 me-4">Quantify</h2>
+            <li class="nav-item ms-4">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Reservation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Inventory</a>
+            </li>
+            <form class="d-flex mb-0 ms-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            </ul>
+            <a class="me-4" href="">Login/Register</a>
+        </div>
+    </nav>
     <script src="npm/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </header>
