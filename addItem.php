@@ -7,10 +7,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quantify · Add Item</title>
 </head>
 <body>
-    <button type="button" class="btn-close btn-close-red m-4" aria-label="Close"></button>
+    <!-- This is the close button -->
+    <div class="d-flex m-4 gap-4 align-items-center">
+        <!-- Button with red close style, redirects on click -->
+        <button type="button" class="btn-close btn-close-red" aria-label="Close" onclick="location.href='inventoryPage.php'"></button>
+        <!-- Add Category button with left margin -->
+        <button type="button" class="btn btn-outline-primary ml-4">
+            <a href="categoryAddItem.php" class="text-decoration-none text-reset">Add Category</a>
+        </button>
+    </div>
 <div class="container text-center p-4">
   <div class="row">
     <div class="col">
@@ -27,6 +35,7 @@
         <span class="input-group-text mt-3 mb-3" id="inputGroup-sizing-default">Price</span>
         <input type="text" class="form-control mt-3 mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
+            <!--This is the combo box for selecting the categories-->
     <select class="form-select itemName-input" aria-label="Default select example">
         <option selected disabled>Choose a category</option>
         <option value="1">One</option> 
@@ -35,9 +44,12 @@
         <option value="4">Four</option>
     </select>
     </div>
+        <!-- This is the button save -->
     <div class="input-group mb-3 mt-4 itemName-input">
         <div class="container">
-            <button type="button" class="btn btn-warning ml-5">Save</button>
+            <button type="button" class="btn btn-warning ml-5">
+                <a href="inventoryPage.php" class="text-decoration-none text-dark">Save</a>
+            </button>
         </div>
     </div>
     </div>
