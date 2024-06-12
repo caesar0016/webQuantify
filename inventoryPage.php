@@ -7,17 +7,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="cssFiles/inventoryPage.css">
-    <title>Quantify · Inventory</title>
+    <title>Quantify · User Orders</title>
 </head>
 <body>
 <div class="d-flex justify-content-between m-2">
     <div class="d-flex">
         <!-- Grouped buttons on the left -->
         <button type="button" class="btn btn-outline-primary mr-2">
-            <a href="userReservation.php" class="text-decoration-none text-reset">User Reservation</a>
+            <a href="userOrders.php" class="text-decoration-none text-reset">User Reservation</a>
         </button>
         <!--Add Extra Button if something to add-->
-        
+
 
 
     </div>
