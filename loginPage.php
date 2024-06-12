@@ -19,10 +19,10 @@
                     <div class="col-12 col-md-8 col-lg-6">
                         <div class="w-100">
                             <label class="visually-hidden mt-4" for="autoSizingInput">Name</label>
-                            <input type="text" class="form-control mt-4 mb-4" id="autoSizingInput" placeholder="Username"> <!--Username Input-->
+                            <input type="text" class="form-control border-black mt-4 mb-4" id="autoSizingInput" placeholder="Username"> <!--Username Input-->
                                 <!--This is the divider for the username and password-->
-                            <label class="visually-hidden mt-4" for="autoSizingInput">Name</label>
-                            <input type="password" class="form-control mt-4 mb-4" id="autoSizingInput" placeholder="Password"> <!--Password Input-->
+                            <label class="visually-hidden mt-4 " for="autoSizingInput">Name</label>
+                            <input type="password" class="form-control border-black mt-4 mb-4" id="autoSizingInput" placeholder="Password"> <!--Password Input-->
                             <button type="button" class="btn btn-primary">Login</button><!--This is the button login-->
                         </div>
                     </div>
