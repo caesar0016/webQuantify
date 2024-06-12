@@ -1,0 +1,8 @@
+.col-fixed-height {
+    height: 700px; /* Set the desired height for the column */
+}
+.fixed-height-img {
+    height: 100%;
+    width: 100%;
+    object-fit: fill; /* Ensures the image covers the area */
+}
