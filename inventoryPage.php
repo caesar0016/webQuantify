@@ -7,15 +7,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="cssFiles/inventoryPage.css">
-    <title>Inventory</title>
+    <title>Quantify · Inventory</title>
 </head>
 <body>
-<div class="d-flex justify-content-end m-2">
-        <!-- Button to add new items to the table, moved to the right with margin -->
+<div class="d-flex justify-content-between m-2">
+    <div class="d-flex">
+        <!-- Grouped buttons on the left -->
         <button type="button" class="btn btn-outline-primary mr-2">
-            <a href="addItem.php" class="text-decoration-none text-reset">Add Item</a>
+            <a href="addItem.php" class="text-decoration-none text-reset">User Reservation</a>
         </button>
+        <!--Add Extra Button if something to add-->
+
+
+        
     </div>
+    <!-- Button to add new items to the table, moved to the right with margin -->
+    <button type="button" class="btn btn-outline-primary">
+        <a href="addItem.php" class="text-decoration-none text-reset">Add Item</a>
+    </button>
+</div>
+
 <table class="table table-hover mt-2">
         <thead>
             <tr>

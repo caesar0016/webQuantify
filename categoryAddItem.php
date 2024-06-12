@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantify · Add Catagory</title>
+    <title>Quantify · Add Category</title>
 </head>
 <body>
     <div class="div" >
@@ -20,7 +20,7 @@
                 <div class="input-group mb-3 px-4 mt-4">
                     <input type="text" class="form-control border-black" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                 </div>
-                <button type="button" class="btn btn-outline-warning">Confirm</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
             </div>            <!--1 out of 2 column-->
             <!--Division -->
             <div class="col border border-dark">     <!--2 out of 2 column-->
