@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col border col-fixed-height p-0">
-            <img src="images/bg_clothes.jpg" alt="Clothes" class="fixed-height-img">
+            <img src="images/bg_clothes.jpg" alt="Clothes" class="fixed-height-img"><!--Images of clothes like literally the other half-->
         </div>
     </div>
 </div>
