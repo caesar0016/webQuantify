@@ -18,7 +18,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8 col-lg-6">
                         <div class="w-100">
-                            <label class="visually-hidden mt-4" for="autoSizingInput">Name</label>
+                            <label class="visually-hidden mt-4" for="autoSizingInput">Name</label><!--label name for the login-->
                             <input type="text" class="form-control border-black mt-4 mb-4" id="autoSizingInput" placeholder="Username"> <!--Username Input-->
                                 <!--This is the divider for the username and password-->
                             <label class="visually-hidden mt-4 " for="autoSizingInput">Name</label>
