@@ -22,7 +22,7 @@
                         <input type="text" class="form-control border border-dark" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col ">
                     <div class="input-group mb-3">
                         <span class="input-group-text border border-dark" id="inputGroup-sizing-default">Last Name</span> <!--This is the lastname-->
                         <input type="text" class="form-control border border-dark" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -35,15 +35,15 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col mt-5">
-                        <div class="input-group mb-5">
+                        <div class="input-group">
                             <span class="input-group-text border border-dark " id="inputGroup-sizing-default">Password</span> <!--This is the password-->
-                            <input type="text" class="form-control border border-dark" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input type="password" class="form-control border border-dark" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                     </div>
-                    <div class="col m-5">
-                        <div class="input-group mb-5">
+                    <div class="col mt-5">
+                        <div class="input-group">
                             <span class="input-group-text border border-dark" id="inputGroup-sizing-default">Confirm Password</span> <!--This is the confirm pass-->
-                            <input type="text" class="form-control border border-dark" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input type="password" class="form-control border border-dark" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                     </div>
                 </div>
