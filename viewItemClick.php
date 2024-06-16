@@ -20,9 +20,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 border text-center">
+            <div class="col-3 border text-center mt-5">
                 <!-- Example single danger button -->
-                <div class="btn-group">
+                <div class="btn-group mt-5">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     Select Size
                 </button>
@@ -33,7 +33,9 @@
                 </ul>
                 </div><br>
                 <div class="btn-group mt-5" role="group" aria-label="Basic outlined example"> <!--Button group for increaseing the qty-->
-                    <button type="button" class="btn btn-outline-primary">Left</button>
+                    <a href="#" class="btn" role="button">
+                        <img src="images/ic_edit.png" alt="Edit">
+                    </a>
                     <input type="text" class="col-3 text-center border-primary mx-2">
                     <button type="button" class="btn btn-outline-primary">Right</button>
                 </div>
