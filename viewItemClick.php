@@ -7,8 +7,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item Click</title>
+    <link rel="stylesheet" href="cssFiles/viewItemClick.css">
 </head>
-<body>
+<body class="light">
     <div class="container-fluid text-center mt-4">
         <div class="row justify-content-center">
             <div class="col-5 ">
@@ -90,7 +91,6 @@
                     <div class="calendar-footer">
                     </div>
                     <div class="month-list">
-                        
                     </div>
                 </div><!--calendar Header-->
             </div>
