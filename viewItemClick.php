@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 border text-center mt-5">
+            <div class="col-3 text-center mt-5">
                 <!-- Example single danger button -->
                 <div class="btn-group mt-5">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,16 +32,20 @@
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
                 </div><br>
-                <div class="btn-group mt-5" role="group" aria-label="Basic outlined example"> <!--Button group for increaseing the qty-->
-                    <a href="#" class="btn" role="button">
-                        <img src="images/ic_edit.png" alt="Edit">
-                    </a>
+                <div class="btn-group mt-5" role="group" aria-label="Basic outlined example"> <!--Button group for increaseing the qty-->   
+                    <button type="button" class="btn btn-outline-primary">
+                        <img src="images/ic_minus.png" alt="Edit">
+                    </button>
                     <input type="text" class="col-3 text-center border-primary mx-2">
-                    <button type="button" class="btn btn-outline-primary">Right</button>
+                    <button type="button" class="btn btn-outline-primary">
+                        <img src="images/ic_add.png" alt="Edit">
+                    </button>
                 </div>
+                <button type="button" class="btn btn-secondary mt-5">Reserve</button>
             </div>
             <div class="col-4 border">
-                wow
+                <h1>Pickup Date</h1><br>
+                
             </div>
         </div>
     </div>
