@@ -46,7 +46,7 @@
             </div>
             <div class="col-4 border">
                 <h1>Pickup Date</h1><br>
-                <div class="calendar">
+                <div class="calendar border border-primary border-2">
                     <div class="calendar-header">
                         <span class="month-picker" id="month-picker">
                             June
@@ -102,5 +102,6 @@
             </div>
         </div>
     </div>
+    <script src="jsFiles/viewItemClick.js"></script>
 </body>
 </html>
