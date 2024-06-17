@@ -44,9 +44,9 @@
                 </div>
                 <button type="button" class="btn btn-secondary mt-5">Reserve</button>
             </div>
-            <div class="col-4 border">
+            <div class="col-4">
                 <h1>Pickup Date</h1><br>
-                <div class="calendar border border-primary border-2">
+                <div class="calendar border border-primary w-2">
                     <div class="calendar-header">
                         <span class="month-picker" id="month-picker">
                             June

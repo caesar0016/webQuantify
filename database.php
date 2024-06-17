@@ -2,7 +2,7 @@
     $db_server = "localhost";
     $db_user = "root";
     $db_pass = "";
-    $db_name = "prac001";
+    $db_name = "webquantify";
     $conn = "";
 
     
