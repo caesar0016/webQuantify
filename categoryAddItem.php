@@ -20,16 +20,18 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         
-        <form action="">
+        <form id="saveCategory">
             <!--This is the modal body-->
             <div class="modal-body">
+                <div class="alert alert-warning d-none">
+                </div>
                 <div class="mt-4">
                     <input type="text" class="form-control border border-dark" name="categoryName" placeholder="Input Category Name" autocomplete="off">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
             </div>
         </form>
@@ -39,6 +41,9 @@
 
     </div>
     </div>
+    <button type="button" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#categoryModal">
+    Add Category
+    </button>
     <div class="container-sm text-center">
     <table class="table mt-5 border">
     <thead>
@@ -79,5 +84,31 @@
   </tbody>
 </table>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+         $(document).on('submit', '#saveCategory', function (e) {
+        e.preventDefault();
+        
+        var formData = new FormData(this);
+
+        formData.append("save_category", true);
+
+        $.ajax({
+            type: 'post',
+            url: 'ajaxFiles/categoryAjax.php',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json', // Corrected dataType
+            success: function (response){
+                if(response.status == 200){
+                    $('.alert').addClass('d-none'); // Corrected selector
+                    $('#categoryModal').modal('hide'); // Corrected modal ID
+                    $('#saveCategory')[0].reset();
+                }
+            }
+        });
+    })
+    </script>
 </body>
 </html>
