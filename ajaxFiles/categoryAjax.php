@@ -14,6 +14,37 @@ try {
     echo "Not connected: " . $ex->getMessage();
 }
 
+
+if(isset($_GET['categoryID'])){
+    $categoryID = mysqli_real_escape_string($conn, $get['categoryID']);
+
+    $query = "select * from categoryTbl where categoryID = '$categoryID'";
+    $query_run = mysqli_query($conn, $query);
+
+    if(mysqli_num_rows($query_run) == 1){
+
+        $category = mysqli_fetch_array($query_run);
+
+        $res = [
+            'status' => 200,
+            'message' => 'Category Fetch successfully',
+            'data' => $category
+
+        ];
+
+        echo json_encode($res);
+        return false;
+
+    }else{
+        $res = [
+            'status' => 404,
+            'message' => 'Category ID not Found'
+        ];
+        echo json_encode($res);
+        return false;
+    }
+}
+
 if(isset($_POST['save_category'])){
     $res = []; // Initialize response array
     

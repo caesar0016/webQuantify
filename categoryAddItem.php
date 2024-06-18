@@ -14,7 +14,7 @@
     </a>
 
     </div>
-    <!-- Modal -->
+    <!-- Add Category Modal -->
     <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -22,7 +22,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Category Name</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="saveCategory" method="POST" action="ajaxFiles/categoryAjax.php">
+                <form id="addCategoryForm" method="POST" action="ajaxFiles/categoryAjax.php">
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div class="alert alert-warning d-none"></div>
@@ -32,7 +32,33 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Add Category</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Category Modal -->
+    <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Category</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editCategoryForm" method="POST" action="ajaxFiles/categoryAjax.php">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="alert alert-warning d-none"></div>
+                        <div class="mt-4">
+                            <input type="hidden" id="editCategoryID" name="categoryID">
+                            <input type="text" class="form-control border border-dark" id="editCategoryInput" name="categoryName" placeholder="Input Category Name" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update Category</button>
                     </div>
                 </form>
             </div>
@@ -56,18 +82,18 @@
             <tbody>
             <?php 
                 require 'database.php';
-                $query = "SELECT categoryName FROM categoryTbl";
+                $query = "SELECT * FROM categoryTbl";
                 $query_run = mysqli_query($conn, $query);
 
                 if(mysqli_num_rows($query_run) > 0){
                     $index = 0; // Initialize $index
-                    foreach($query_run as $categoryName){
+                    foreach($query_run as $categoryList){
                         ?>
                         <tr>
                             <th scope="row"><?= $index + 1 ?></th>
-                            <td><?= $categoryName['categoryName'] ?></td> <!-- Access 'categoryName' element -->
+                            <td><?= $categoryList['categoryName'] ?></td> <!-- Access 'categoryName' element -->
                             <td>
-                                <button type="button" class="btn btn-outline-primary edit-category" data-bs-toggle="modal" data-bs-target="#categoryModal" data-category="<?= $categoryName['categoryName'] ?>">
+                                <button type="button" value="<?= $categoryList['categoryID']; ?>" class="editCategorybtn btn btn-outline-primary edit-category" data-bs-toggle="modal" data-bs-target="#editCategoryModal" data-category="<?= $categoryList['categoryName'] ?>">
                                     <img src="images/ic_edit.png" alt="Edit">
                                 </button>
                             </td>
@@ -91,45 +117,81 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="npm/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script>
-        $(document).ready(function() {
-            // Edit category button click event
-            $('.edit-category').click(function() {
-                var categoryName = $(this).data('category');
-                $('#categoryInput').val(categoryName);
-            });
+    $(document).ready(function() {
+        // Edit category button click event
+        $('.edit-category').click(function() {
+            var categoryName = $(this).data('category');
+            var categoryID = $(this).val();
+            $('#editCategoryInput').val(categoryName);
+            $('#editCategoryID').val(categoryID);
+           alert(categoryID);
+        });
 
-            // Form submission
-            $(document).on('submit', '#saveCategory', function (e) {
-                e.preventDefault();
-                
-                var formData = new FormData(this);
-                formData.append("save_category", true);
+        // Form submission for adding category
+        $(document).on('submit', '#addCategoryForm', function (e) {
+            e.preventDefault();
+            
+            var formData = new FormData(this);
+            formData.append("save_category", true);
 
-                $.ajax({
-                    type: 'POST',
-                    url: 'ajaxFiles/categoryAjax.php',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    dataType: 'json',
-                    success: function (response) {
-                        console.log(response); // Debugging: Log the response to console
-                        if(response.status == 200){
-                            $('.alert').addClass('d-none');
-                            $('#categoryModal').modal('hide');
-                            $('#saveCategory')[0].reset();
-                            // Update table with the new category
-                            $('#categoryTbl1').load(location.href + " #categoryTbl1");
-                        } else {
-                            $('.alert').removeClass('d-none').text(response.message);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText); // Debugging: Log any errors to console
+            $.ajax({
+                type: 'POST',
+                url: 'ajaxFiles/categoryAjax.php',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response); // Debugging: Log the response to console
+                    if(response.status == 200){
+                        $('.alert').addClass('d-none');
+                        $('#categoryModal').modal('hide');
+                        $('#addCategoryForm')[0].reset();
+                        // Update table with the new category
+                        $('#categoryTbl1').load(location.href + " #categoryTbl1");
+                    } else {
+                        $('.alert').removeClass('d-none').text(response.message);
                     }
-                });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText); // Debugging: Log any errors to console
+                }
             });
         });
+
+        // Form submission for editing category
+        $(document).on('submit', '#editCategoryForm', function (e) {
+            e.preventDefault();
+            
+            var formData = new FormData(this);
+            formData.append("edit_category", true);
+            
+            $.ajax({
+                type: 'POST',
+                url: 'ajaxFiles/categoryAjax.php',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response); // Debugging: Log the response to console
+                    if(response.status == 200){
+                        $('.alert').addClass('d-none');
+                        $('#editCategoryModal').modal('hide');
+                        $('#editCategoryForm')[0].reset();
+                        // Update table with the new category
+                        $('#categoryTbl1').load(location.href + " #categoryTbl1");
+                    } else {
+                        $('.alert').removeClass('d-none').text(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText); // Debugging: Log any errors to console
+                }
+            });
+        });
+    });
     </script>
+
 </body>
 </html>
