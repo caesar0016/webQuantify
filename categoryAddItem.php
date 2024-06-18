@@ -59,6 +59,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Update Category</button>
+                        <button type="submit" class="btn btn-danger" id="deleteCategoryBtn">Delete</button>
                     </div>
                 </form>
             </div>
@@ -82,7 +83,7 @@
             <tbody>
             <?php 
                 require 'database.php';
-                $query = "SELECT * FROM categoryTbl";
+                $query = "SELECT * FROM categoryTbl where archive = 1";
                 $query_run = mysqli_query($conn, $query);
 
                 if(mysqli_num_rows($query_run) > 0){
@@ -93,9 +94,10 @@
                             <th scope="row"><?= $index + 1 ?></th>
                             <td><?= $categoryList['categoryName'] ?></td> <!-- Access 'categoryName' element -->
                             <td>
-                                <button type="button" value="<?= $categoryList['categoryID']; ?>" class="editCategorybtn btn btn-outline-primary edit-category" data-bs-toggle="modal" data-bs-target="#editCategoryModal" data-category="<?= $categoryList['categoryName'] ?>">
+                                <button type="button" class="editCategorybtn btn btn-outline-primary edit-category" data-bs-toggle="modal" data-bs-target="#editCategoryModal" data-category="<?= $categoryList['categoryName'] ?>" value="<?= $categoryList['categoryID']; ?>">
                                     <img src="images/ic_edit.png" alt="Edit">
                                 </button>
+
                             </td>
                         </tr>
                         <?php
@@ -117,15 +119,47 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="npm/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script>
-    $(document).ready(function() {
-        // Edit category button click event
-        $('.edit-category').click(function() {
-            var categoryName = $(this).data('category');
-            var categoryID = $(this).val();
-            $('#editCategoryInput').val(categoryName);
-            $('#editCategoryID').val(categoryID);
-        });
+$(document).ready(function() {
+    // Edit category button click event
+    $('.edit-category').click(function() {
+        var categoryName = $(this).data('category');
+        var categoryID = $(this).val();
+        $('#editCategoryInput').val(categoryName);
+        $('#editCategoryID').val(categoryID);
 
+        // Update the modal title with the selected category name
+        $('.modal-title').text('Edit Category - ' + categoryName);
+    });
+
+    // This is the delete function when delete button is clicked
+    $('#deleteCategoryBtn').click(function (e) {
+        e.preventDefault();
+
+        var categoryID = $('#editCategoryID').val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'ajaxFiles/categoryAjax.php',
+            data: {delete_category: true, categoryID: categoryID},
+            dataType: 'json',
+            success: function (response){
+                console.log(response); // For debugging
+
+                if(response.status == 200){ // If it's a success
+                    // Update the table
+                    $('#editCategoryModal').modal('hide');
+                    //$('#categoryTbl1').load(location.href + " #categoryTbl1"); // Correct ID for table
+                    location.reload();
+                    
+                } else {
+                    $('.alert').removeClass('d-none').text(response.message);
+                }
+            },
+            error:function(xhr, status, error){
+                console.error(xhr.responseText);
+            }
+        });
+    });
         // Form submission for adding category
         $(document).on('submit', '#addCategoryForm', function (e) {
             e.preventDefault();
@@ -147,7 +181,8 @@
                         $('#categoryModal').modal('hide');
                         $('#addCategoryForm')[0].reset();
                         // Update table with the new category
-                        $('#categoryTbl1').load(location.href + " #categoryTbl1");
+                       // $('#categoryTbl1').load(location.href + " #categoryTbl1");
+                       location.reload();
                     } else {
                         $('.alert').removeClass('d-none').text(response.message);
                     }

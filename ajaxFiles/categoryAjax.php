@@ -15,6 +15,25 @@ try {
     exit(); // Ensure script stops if connection fails
 }
 
+//THis handles the archiving the category
+
+if(isset($_POST['delete_category'])){
+    
+    $categoryID = $_POST['categoryID'];
+    $query = "update categoryTbl set archive = 0 where categoryID = '$categoryID'";
+
+    $query_run = mysqli_query($conn, $query);
+
+    if($query_run){
+        $response = array('status' => 200, 'message' => 'Category Deleted Successfully.');
+    }else{
+        $response = array('status' => 500, 'message' => 'Failed to Delete Category.');
+    }
+    
+    echo json_encode($response);
+
+}
+
 // Handle editing category
 if(isset($_POST['edit_category'])){
     $res = []; // Initialize response array
@@ -30,7 +49,7 @@ if(isset($_POST['edit_category'])){
             'message' => 'Category name cannot be empty'
         ];
     } else {
-        $query = "UPDATE categoryTbl SET categoryName=? WHERE categoryID=?";
+        $query = "UPDATE categoryTbl SET categoryName=? WHERE categoryID=? and archive = 1";
         $statement = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($statement, "si", $categoryName, $categoryID); // Note the "si" type parameters
         
@@ -53,7 +72,7 @@ if(isset($_POST['edit_category'])){
     header('Content-Type: application/json');
     echo json_encode($res);
     
-    // Close database connection
+    // Close database connection    
     mysqli_close($conn);
     exit(); // Ensure script stops after handling request
 }
@@ -62,7 +81,7 @@ if(isset($_POST['edit_category'])){
 if(isset($_GET['categoryID'])){
     $categoryID = mysqli_real_escape_string($conn, $_GET['categoryID']); // Fix typo: $get to $_GET
 
-    $query = "SELECT * FROM categoryTbl WHERE categoryID = '$categoryID'";
+    $query = "SELECT * FROM categoryTbl WHERE categoryID = '$categoryID' and archive = 1";
     $query_run = mysqli_query($conn, $query);
 
     if(mysqli_num_rows($query_run) == 1){
