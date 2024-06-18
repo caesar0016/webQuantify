@@ -15,6 +15,8 @@ try {
 }
 
 if(isset($_POST['save_category'])){
+    $res = []; // Initialize response array
+    
     // Handle saving category here
     $categoryName = mysqli_real_escape_string($conn, $_POST['categoryName']);
     
@@ -25,11 +27,11 @@ if(isset($_POST['save_category'])){
             'message' => 'Category name cannot be empty'
         ];
     } else {
-        $query = "INSERT INTO categoryTbl (categoryName) VALUES ('$categoryName')";
-
-        $query_run = mysqli_query($conn, $query);
-
-        if($query_run){
+        $query = "INSERT INTO categoryTbl (categoryName) VALUES (?)";
+        $statement = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($statement, "s", $categoryName);
+        
+        if(mysqli_stmt_execute($statement)){
             $res = [
                 'status' => 200,
                 'message' => 'Category inserted successfully'
@@ -37,13 +39,18 @@ if(isset($_POST['save_category'])){
         } else {
             $res = [
                 'status' => 500,
-                'message' => 'Error inserting category'
+                'message' => 'Error inserting category: ' . mysqli_error($conn)
             ];
         }
+        
+        mysqli_stmt_close($statement); // Close statement after execution
     }
     
     // Send JSON response
     header('Content-Type: application/json');
     echo json_encode($res);
+    
+    // Close database connection
+    mysqli_close($conn);
 }
 ?>
