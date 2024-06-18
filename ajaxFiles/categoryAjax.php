@@ -12,39 +12,81 @@ try {
     }
 } catch (Exception $ex) {
     echo "Not connected: " . $ex->getMessage();
+    exit(); // Ensure script stops if connection fails
 }
 
+// Handle editing category
+if(isset($_POST['edit_category'])){
+    $res = []; // Initialize response array
+    
+    // Handle saving category here
+    $categoryName = mysqli_real_escape_string($conn, $_POST['categoryName']);
+    $categoryID = mysqli_real_escape_string($conn, $_POST['categoryID']);
 
+    if(empty($categoryName)){
+        // Handle the case where category name is empty
+        $res = [
+            'status' => 400,
+            'message' => 'Category name cannot be empty'
+        ];
+    } else {
+        $query = "UPDATE categoryTbl SET categoryName=? WHERE categoryID=?";
+        $statement = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($statement, "si", $categoryName, $categoryID); // Note the "si" type parameters
+        
+        if(mysqli_stmt_execute($statement)){
+            $res = [
+                'status' => 200,
+                'message' => 'Update successful'
+            ];
+        } else {
+            $res = [
+                'status' => 500,
+                'message' => 'Error updating category: ' . mysqli_error($conn)
+            ];
+        }
+        
+        mysqli_stmt_close($statement); // Close statement after execution
+    }
+    
+    // Send JSON response
+    header('Content-Type: application/json');
+    echo json_encode($res);
+    
+    // Close database connection
+    mysqli_close($conn);
+    exit(); // Ensure script stops after handling request
+}
+
+// Handle fetching category by ID
 if(isset($_GET['categoryID'])){
-    $categoryID = mysqli_real_escape_string($conn, $get['categoryID']);
+    $categoryID = mysqli_real_escape_string($conn, $_GET['categoryID']); // Fix typo: $get to $_GET
 
-    $query = "select * from categoryTbl where categoryID = '$categoryID'";
+    $query = "SELECT * FROM categoryTbl WHERE categoryID = '$categoryID'";
     $query_run = mysqli_query($conn, $query);
 
     if(mysqli_num_rows($query_run) == 1){
-
         $category = mysqli_fetch_array($query_run);
 
         $res = [
             'status' => 200,
-            'message' => 'Category Fetch successfully',
+            'message' => 'Category fetched successfully',
             'data' => $category
-
         ];
-
-        echo json_encode($res);
-        return false;
-
-    }else{
+    } else {
         $res = [
             'status' => 404,
-            'message' => 'Category ID not Found'
+            'message' => 'Category ID not found'
         ];
-        echo json_encode($res);
-        return false;
     }
+
+    header('Content-Type: application/json');
+    echo json_encode($res);
+    mysqli_close($conn);
+    exit(); // Ensure script stops after handling request
 }
 
+// Handle saving category
 if(isset($_POST['save_category'])){
     $res = []; // Initialize response array
     
@@ -83,5 +125,6 @@ if(isset($_POST['save_category'])){
     
     // Close database connection
     mysqli_close($conn);
+    exit(); // Ensure script stops after handling request
 }
 ?>

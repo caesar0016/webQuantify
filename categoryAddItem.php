@@ -50,7 +50,7 @@
                 <form id="editCategoryForm" method="POST" action="ajaxFiles/categoryAjax.php">
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <div class="alert alert-warning d-none"></div>
+                        <div id="categoryModalUpdate" class="alert alert-warning d-none"></div>
                         <div class="mt-4">
                             <input type="hidden" id="editCategoryID" name="categoryID">
                             <input type="text" class="form-control border border-dark" id="editCategoryInput" name="categoryName" placeholder="Input Category Name" autocomplete="off">
@@ -124,7 +124,6 @@
             var categoryID = $(this).val();
             $('#editCategoryInput').val(categoryName);
             $('#editCategoryID').val(categoryID);
-           alert(categoryID);
         });
 
         // Form submission for adding category
@@ -165,7 +164,7 @@
             
             var formData = new FormData(this);
             formData.append("edit_category", true);
-            
+
             $.ajax({
                 type: 'POST',
                 url: 'ajaxFiles/categoryAjax.php',
