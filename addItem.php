@@ -22,7 +22,7 @@ include("database.php");
         </button>
     </div>
     <div class="container text-center p-4">
-        <form method="post" action="ajaxFiles/insertMerch.php" id="formSaveMerch">
+        <form method="post" action="ajaxFiles/insertMerch.php" id="formSaveMerch" autocomplete="off" enctype="multipart/form-data">
             <div class="row">
                 <div class="col">
                     <div class="container">
@@ -73,15 +73,15 @@ include("database.php");
                 </div>
                 <!-- Image Preview -->
                 <div class="card mt-4 border border-black" style="width: 20rem;">
-                    <img src="https://i.pinimg.com/564x/95/5a/f7/955af7a2d19cc3cb70abb6d3e9a4c2ed.jpg" class="card-img-top mt-2" alt="...">
+                    <img id="itemImagePreview" src="" class="card-img-top mt-2" alt="...">
                     <div class="card-body">
                         <p class="card-text">Insert Description</p>
                         <p class="card-text">Insert Price</p>
                     </div>
                     <!-- File Input -->
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupFile01">Choose Image</label>
-                        <input type="file" class="form-control" id="inputGroupFile01" name="itemImage">
+                        <label class="input-group-text" for="inputGroupFile01"></label>
+                        <input type="file" class="form-control" id="inputGroupFile01" name="itemImage" accept=".jpg, .png, .jpeg" onchange="previewImage(event)">
                     </div>
                 </div>
             </div>
@@ -129,7 +129,16 @@ include("database.php");
             });
         });
     </script>
-
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var itemImagePreview = document.getElementById('itemImagePreview');
+                itemImagePreview.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 
 </body>
 
