@@ -45,7 +45,8 @@
             <?php
                 require 'database.php';
 
-                $query = "Select 
+                $query = "Select
+                            m.merchID, 
                             m.itemName,
                             c.categoryName,
                             m.description,
@@ -72,7 +73,7 @@
                         echo "<td>" .$row["stock"] . "</td>";
                         echo '<td>
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                    <a href="addItem.php?id=' . htmlspecialchars($row["itemName"]) . '" class="btn btn-outline-secondary">
+                                    <a href="editMerch.php?merchID=' . $row["merchID"] . '" class="btn btn-outline-secondary">
                                         <img src="images/ic_edit.png" alt="Edit">
                                     </a>
                                     <button type="button" class="btn btn-outline-secondary">

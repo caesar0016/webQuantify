@@ -149,7 +149,8 @@ $(document).ready(function() {
                     // Update the table
                     $('#editCategoryModal').modal('hide');
                     //$('#categoryTbl1').load(location.href + " #categoryTbl1"); // Correct ID for table
-                    location.reload();
+                    window.location.href = window.location.href;
+
                     
                 } else {
                     $('.alert').removeClass('d-none').text(response.message);
@@ -182,7 +183,7 @@ $(document).ready(function() {
                         $('#addCategoryForm')[0].reset();
                         // Update table with the new category
                        // $('#categoryTbl1').load(location.href + " #categoryTbl1");
-                       location.reload();
+                       window.location.href = window.location.href;
                     } else {
                         $('.alert').removeClass('d-none').text(response.message);
                     }
@@ -214,7 +215,7 @@ $(document).ready(function() {
                         $('#editCategoryModal').modal('hide');
                         $('#editCategoryForm')[0].reset();
                         // Update table with the new category
-                        $('#categoryTbl1').load(location.href + " #categoryTbl1");
+                        window.location.href = window.location.href;
                     } else {
                         $('.alert').removeClass('d-none').text(response.message);
                     }
