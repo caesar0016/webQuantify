@@ -35,12 +35,12 @@ if ($result && $result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $merchID = isset($row['merchID']) ? $row['merchID'] : ''; // Initialize $itemName with the item name, or an empty string if not available
     $itemName = isset($row['itemName']) ? $row['itemName'] : ''; // Initialize $itemName with the item name, or an empty string if not available
-    $categoryName = isset($row['categoryName']) ? $row['categoryName'] : ''; 
-    $description = isset($row['description']) ? $row['description'] : ''; 
-    $size = isset($row['size']) ? $row['size'] : ''; 
-    $price = isset($row['price']) ? $row['price'] : ''; 
-    $stock = isset($row['stock']) ? $row['stock'] : ''; 
-    $categoryID = isset($row['categoryID']) ? $row['categoryID'] : ''; 
+    $categoryName = isset($row['categoryName']) ? $row['categoryName'] : '';
+    $description = isset($row['description']) ? $row['description'] : '';
+    $size = isset($row['size']) ? $row['size'] : '';
+    $price = isset($row['price']) ? $row['price'] : '';
+    $stock = isset($row['stock']) ? $row['stock'] : '';
+    $categoryID = isset($row['categoryID']) ? $row['categoryID'] : '';
 } else {
     echo "Item not found.";
     exit;
@@ -99,7 +99,7 @@ $conn->close();
                         </div>
                         <!-- Category Selection -->
                         <select name="category" class="form-select itemName-input mt-4" aria-label="Default select example" required>
-                            <option selected disabled><?php echo"$categoryName";?></option>
+                            <option selected disabled><?php echo "$categoryName"; ?></option>
                             <?php
                             require 'database.php';
 
@@ -122,6 +122,9 @@ $conn->close();
                             <button type="submit" class="btn btn-warning ml-5" id="btnUpdateMerch">
                                 Save
                             </button>
+                            <button type="submit" class="btn btn-danger ml-5" id="btnDeleteMerch">
+                                Delete
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -130,7 +133,9 @@ $conn->close();
                     <img id="itemImagePreview" src="" class="card-img-top mt-2" alt="...">
                     <div class="card-body">
                         <p class="card-text">This is an image description</p>
-                        <p class="card-text"><div class="h5 text-danger">350</div></p>
+                        <p class="card-text">
+                        <div class="h5 text-danger">350</div>
+                        </p>
                     </div>
                     <!-- File Input -->
                     <div class="input-group mb-3">
@@ -182,8 +187,42 @@ $conn->close();
                     }
                 });
             });
+
+            // Event listener for the delete button
+            $('#btnDeleteMerch').click(function(e) {
+                e.preventDefault();
+
+                // Extract the merchID from the button or any other suitable place where you store it
+                var merchID = $('input[name="merchID"]').val();
+
+                // Send AJAX request to deleteMerch.php
+                $.ajax({
+                    type: 'POST',
+                    url: 'ajaxFiles/insertMerch.php',
+                    data: {
+                        merchID: merchID
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Deletion successful, perform any necessary actions (e.g., page reload)
+                            alert('Item successfully deleted.');
+                            window.location.href = 'inventoryPage.php';
+                        } else {
+                            // Deletion failed, inform the user
+                            alert('Failed to delete item: ' + response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Error handling for AJAX request failure
+                        console.error('AJAX request failed:', error);
+                        alert('An error occurred while deleting the item. Please try again later.');
+                    }
+                });
+            });
         });
     </script>
+
     <script>
         function previewImage(event) {
             var reader = new FileReader();

@@ -1,6 +1,7 @@
 <?php
-    include("header.html");
+include("header.html");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,50 +44,49 @@
         </thead>
         <tbody>
             <?php
-                require 'database.php';
+            require 'database.php';
 
-                $query = "Select
-                            m.merchID, 
-                            m.itemName,
-                            c.categoryName,
-                            m.description,
-                            m.size,
-                            m.price,
-                            m.stock
-                        from merchtbl as m
-                        left JOIN categorytbl as c
-                        on m.categoryID = c.categoryID;";
+            $query = "SELECT
+                        m.merchID, 
+                        m.itemName,
+                        c.categoryName,
+                        m.description,
+                        m.size,
+                        m.price,
+                        m.stock
+                    FROM merchtbl AS m
+                    LEFT JOIN categorytbl AS c
+                    ON m.categoryID = c.categoryID
+                    WHERE m.archiveFlag = 1;";
 
-                $query_run = mysqli_query($conn, $query);
+            $query_run = mysqli_query($conn, $query);
 
-                if(mysqli_num_rows($query_run)){
-                    $counter = 1;
+            if (mysqli_num_rows($query_run)) {
+                $counter = 1;
 
-                    while($row = mysqli_fetch_assoc($query_run)){
-                        echo "<tr>";
-                        echo "<td>" . $counter++ . "</td>";
-                        echo "<td>" . $row["itemName"] . "</td>";
-                        echo "<td>" . $row["categoryName"] . "</td>";
-                        echo "<td>" .$row["description"] . "</td>";
-                        echo "<td>" .$row["size"] . "</td>";
-                        echo "<td>" .$row["price"] . "</td>";
-                        echo "<td>" .$row["stock"] . "</td>";
-                        echo '<td>
-                                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                    <a href="editMerch.php?merchID=' . $row["merchID"] . '" class="btn btn-outline-secondary">
-                                        <img src="images/ic_edit.png" alt="Edit">
-                                    </a>
-                                    <button type="button" class="btn btn-outline-secondary">
-                                        <img src="images/ic_trash.png" alt="Delete">
-                                    </button>
-                                </div>
-                            </td>';
-                        echo "</tr>";
-                    }
-                }else{
-                    echo "<tr><td colspan='8'>No products found</td></tr>";;
-                } 
+                while ($row = mysqli_fetch_assoc($query_run)) {
+                    echo "<tr>";
+                    echo "<td>" . $counter++ . "</td>";
+                    echo "<td>" . $row["itemName"] . "</td>";
+                    echo "<td>" . $row["categoryName"] . "</td>";
+                    echo "<td>" . $row["description"] . "</td>";
+                    echo "<td>" . $row["size"] . "</td>";
+                    echo "<td>" . $row["price"] . "</td>";
+                    echo "<td>" . $row["stock"] . "</td>";
+                    echo '<td>  
+                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                <a href="editMerch.php?merchID=' . $row["merchID"] . '" class="btn btn-outline-secondary">
+                                    <img src="images/ic_edit.png" alt="Edit">
+                                </a>
+                            </div>
+                        </td>';
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='8'>No products found</td></tr>";
+            }
             ?>
+
         </tbody>
     </table>
 </body>
