@@ -22,6 +22,7 @@ if(isset($_POST['addMerch'])){
     $description = $_POST['itemDesc'];
     $size = $_POST['itemSize'];
     $price = $_POST['itemPrice'];
+    $itemStock = $_POST['itemStock'];
     $category = $_POST['category'];
 
 
@@ -56,7 +57,7 @@ if(isset($_POST['addMerch'])){
     }
 
     // Now insert data into the database
-    $query = "INSERT INTO merchTbl (itemName, description, size, price, categoryID, imagePath) VALUES (?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO merchTbl (itemName, description, size, price, stock, categoryID, imagePath) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $statement = mysqli_prepare($conn, $query);
 
     if (!$statement) {
@@ -64,7 +65,7 @@ if(isset($_POST['addMerch'])){
         exit();
     }
 
-    mysqli_stmt_bind_param($statement, "sssdis", $itemName, $description, $size, $price, $category, $newImageName);
+    mysqli_stmt_bind_param($statement, "sssdiis", $itemName, $description, $size, $price, $itemStock, $category, $newImageName);
 
     if(mysqli_stmt_execute($statement)) {
         $res['status'] = 'success';

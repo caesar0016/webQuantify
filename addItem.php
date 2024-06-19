@@ -26,7 +26,7 @@ include("database.php");
             <div class="row">
                 <div class="col">
                     <div class="container">
-                        <div class="input-group mb-3 mt-5 itemName-input">
+                        <div class="input-group mb-3 itemName-input">
                             <!-- Item Name -->
                             <span class="input-group-text mt-3" id="inputGroup-sizing-default">Item Name</span>
                             <input type="text" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemName" required>
@@ -37,14 +37,19 @@ include("database.php");
                             <input type="text" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemDesc" required>
                         </div>
                         <!-- Size and Price -->
-                        <div class="input-group mb-3 mt-4 itemName-input">
+                        <div class="input-group mt-4 itemName-input">
                             <span class="input-group-text mt-3 mb-3" id="inputGroup-sizing-default">Size</span>
                             <input type="text" class="form-control mt-3 mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemSize" required>
                             <span class="input-group-text mt-3 mb-3" id="inputGroup-sizing-default">Price</span>
                             <input type="number" class="form-control mt-3 mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemPrice" required>
                         </div>
+                        <!-- Stock -->
+                        <div class="input-group mb-3 itemName-input">
+                            <span class="input-group-text mt-3" id="inputGroup-sizing-default">Stock</span>
+                            <input type="text" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemStock" required>
+                        </div>
                         <!-- Category Selection -->
-                        <select name="category" class="form-select itemName-input" aria-label="Default select example" required>
+                        <select name="category" class="form-select itemName-input mt-4" aria-label="Default select example" required>
                             <option selected disabled>Choose a category</option>
                             <?php
                             require 'database.php';
