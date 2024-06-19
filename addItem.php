@@ -46,7 +46,7 @@ include("database.php");
                         <!-- Stock -->
                         <div class="input-group mb-3 itemName-input">
                             <span class="input-group-text mt-3" id="inputGroup-sizing-default">Stock</span>
-                            <input type="text" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemStock" required>
+                            <input type="number" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemStock" required>
                         </div>
                         <!-- Category Selection -->
                         <select name="category" class="form-select itemName-input mt-4" aria-label="Default select example" required>
@@ -70,7 +70,7 @@ include("database.php");
                     <!-- Save Button -->
                     <div class="input-group mb-3 mt-4 itemName-input">
                         <div class="container">
-                            <button type="submit" class="btn btn-warning ml-5">
+                            <button type="submit" class="btn btn-warning ml-5" id="btnSubmit">
                                 Save
                             </button>
                         </div>
@@ -122,19 +122,20 @@ include("database.php");
                             window.location.href = 'inventoryPage.php';
                             alert('Item successfully added.');
                         } else {
-                            console.error('Failed to add merch:', response.message);
-                            alert('Failed to add merchandise: ' + response.message + '. Please try again.');
-                            console.log(response);
+                            // console.error('Failed to add merch:', response.message);
+                            // alert('Failed to add merchandise: ' + response.message + '. Please try again.');
+                            // console.log(response);
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.error('AJAX request failed:', error);
-                        alert('An error occurred while adding merchandise. Please try again later.');
+                        // console.error('AJAX request failed:', error);
+                        // alert('An error occurred while adding merchandise. Please try again later.');
                     }
                 });
             });
         });
     </script>
+
     <script>
         function previewImage(event) {
             var reader = new FileReader();
