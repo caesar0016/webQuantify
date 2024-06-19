@@ -13,11 +13,13 @@ $merchID = (int)$_GET['merchID']; // Ensure merchID is an integer to prevent SQL
 $query = "SELECT 
             m.merchID, 
             m.itemName,
+            c.categoryID,
             c.categoryName,
             m.description,
             m.size,
             m.price,
-            m.stock
+            m.stock,
+            m.imagePath
           FROM merchtbl AS m
           LEFT JOIN categorytbl AS c
           ON m.categoryID = c.categoryID
@@ -31,12 +33,14 @@ $result = $stmt->get_result();
 if ($result && $result->num_rows > 0) {
     // Fetch the result
     $row = $result->fetch_assoc();
+    $merchID = isset($row['merchID']) ? $row['merchID'] : ''; // Initialize $itemName with the item name, or an empty string if not available
     $itemName = isset($row['itemName']) ? $row['itemName'] : ''; // Initialize $itemName with the item name, or an empty string if not available
     $categoryName = isset($row['categoryName']) ? $row['categoryName'] : ''; 
     $description = isset($row['description']) ? $row['description'] : ''; 
     $size = isset($row['size']) ? $row['size'] : ''; 
     $price = isset($row['price']) ? $row['price'] : ''; 
     $stock = isset($row['stock']) ? $row['stock'] : ''; 
+    $categoryID = isset($row['categoryID']) ? $row['categoryID'] : ''; 
 } else {
     echo "Item not found.";
     exit;
@@ -65,8 +69,9 @@ $conn->close();
         </button>
     </div>
     <div class="container text-center p-4">
-        <form method="post" action="ajaxFiles/insertMerch.php" id="formSaveMerch" autocomplete="off" enctype="multipart/form-data">
+        <form method="post" action="ajaxFiles/insertMerch.php" id="formEditMerch" autocomplete="off" enctype="multipart/form-data">
             <h4>Update Item</h4>
+            <input type="hidden" name="merchID" value="<?php echo $merchID; ?>">
             <div class="row">
                 <div class="col">
                     <div class="container">
@@ -114,7 +119,7 @@ $conn->close();
                     <!-- Save Button -->
                     <div class="input-group mb-3 mt-4 itemName-input">
                         <div class="container">
-                            <button type="submit" class="btn btn-warning ml-5">
+                            <button type="submit" class="btn btn-warning ml-5" id="btnUpdateMerch">
                                 Save
                             </button>
                         </div>
@@ -130,7 +135,7 @@ $conn->close();
                     <!-- File Input -->
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupFile01"></label>
-                        <input type="file" class="form-control" id="inputGroupFile01" name="itemImage" accept=".jpg, .png, .jpeg" onchange="previewImage(event)" required>
+                        <input type="file" class="form-control" id="inputGroupFile01" name="itemImage" accept=".jpg, .png, .jpeg" onchange="previewImage(event)">
                     </div>
                 </div>
             </div>
@@ -142,13 +147,13 @@ $conn->close();
     <script>
         $(document).ready(function() {
             // This handles adding merch to the database
-            $(document).on('submit', '#formSaveMerch', function(e) {
+            $(document).on('submit', '#formEditMerch', function(e) {
                 e.preventDefault();
 
                 var categoryID = $('select[name="category"]').val();
                 // Get form data
                 var formData = new FormData(this);
-                formData.append("addMerch", true);
+                formData.append("updateMerch", true);
 
                 // Send AJAX request
                 $.ajax({
@@ -163,7 +168,7 @@ $conn->close();
                         if (response.status === 'success') {
                             console.log(response);
                             // Uncomment this line if you want to reload the page on success
-                            location.reload();
+                            window.location.href = 'inventoryPage.php';
                             alert('Item successfully added.');
                         } else {
                             console.error('Failed to add merch:', response.message);

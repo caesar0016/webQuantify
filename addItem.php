@@ -119,7 +119,7 @@ include("database.php");
                         if (response.status === 'success') {
                             console.log(response);
                             // Uncomment this line if you want to reload the page on success
-                            // location.reload();
+                            window.location.href = 'inventoryPage.php';
                             alert('Item successfully added.');
                         } else {
                             console.error('Failed to add merch:', response.message);

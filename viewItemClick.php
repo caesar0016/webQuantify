@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
             <div class="col-5 ">
                 <div class="card mx-auto border border-dark border-3" style="width: 20rem;">
-                    <img src="images/bg_clothes.jpg" class="card-img-top" alt="Clothes Images" style="width: 100%; height: 50%; margin: auto;">
+                    <img src="https://media.karousell.com/media/photos/products/2022/2/21/sti_college_school_uniform_1645456214_0f6c08a3" class="card-img-top" alt="Clothes Images" style="width: 100%; height: 50%; margin: auto;">
                     <div class="card-body text-center" style="width: 50%; margin: auto;">
                         <p class="card-text">Polo</p>
                         <p class="card-text">350</p>

@@ -78,5 +78,40 @@ if(isset($_POST['addMerch'])){
 
     mysqli_stmt_close($statement);
 }
+    if(isset($_POST['updateMerch'])){
+        // Receive the update data
+        $itemName = $_POST['itemName'];
+        $description = $_POST['itemDesc'];
+        $size = $_POST['itemSize'];
+        $price = $_POST['itemPrice'];
+        $itemStock = $_POST['itemStock'];
+        $category = $_POST['category'];
+        $merchID = $_POST['merchID']; // Assuming you pass merchID through URL or some hidden input in the form
+
+        // Validate the data (e.g., check for empty fields, validate numeric values, etc.)
+
+        // Update the database
+        $query = "UPDATE merchtbl SET itemName=?, description=?, size=?, price=?, stock=?, categoryID=? WHERE merchID=?";
+        $statement = mysqli_prepare($conn, $query);
+
+        if (!$statement) {
+            echo json_encode(array('status' => 'error', 'message' => 'Query preparation failed: ' . mysqli_error($conn)));
+            exit();
+        }
+
+        mysqli_stmt_bind_param($statement, "sssdiii", $itemName, $description, $size, $price, $itemStock, $category, $merchID);
+
+        if(mysqli_stmt_execute($statement)) {
+            $res['status'] = 'success';
+        } else {
+            $res['status'] = 'error';
+            $res['message'] = 'Execution failed: ' . mysqli_stmt_error($statement);
+        }
+
+        echo json_encode($res);
+
+        mysqli_stmt_close($statement);
+    }
+
 
 ?>
