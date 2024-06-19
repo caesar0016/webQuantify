@@ -22,72 +22,115 @@ include("database.php");
         </button>
     </div>
     <div class="container text-center p-4">
-        <div class="row">
-            <div class="col">
-                <div class="container">
-                    <div class="input-group mb-3 mt-5 itemName-input">
-                        <!-- This is the input Item Name -->
-                        <span class="input-group-text mt-3" id="inputGroup-sizing-default">Item Name</span>
-                        <input type="text" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <div class="input-group mb-3 mt-4 itemName-input">
-                        <!-- This is the input Description -->
-                        <span class="input-group-text mt-3" id="inputGroup-sizing-default">Description</span>
-                        <input type="text" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <div class="input-group mb-3 mt-4 itemName-input">
-                        <!-- THis is the input price -->
-                        <span class="input-group-text mt-3 mb-3" id="inputGroup-sizing-default">Price</span>
-                        <input type="text" class="form-control mt-3 mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <!--This is the combo box for selecting the categories-->
-                    <select class="form-select itemName-input" aria-label="Default select example">
-                        <option selected disabled>Choose a category</option>
-
-                        <!-- This is the php script for fetching the categories from the database -->
-                        <?php
-                        require 'database.php';
-
-                        $query = "SELECT * FROM categoryTbl WHERE archive = 1";
-                        $query_run = mysqli_query($conn, $query);
-
-                        // Checking if any categories are returned
-                        if (mysqli_num_rows($query_run) > 0) {
-                            while ($categoryList = mysqli_fetch_assoc($query_run)) {
-                                // Output for every category
-                                echo '<option value="' . $categoryList['categoryID'] . '">' . $categoryList['categoryName'] . '</option>';
-                            }
-                        } else {
-                            // Output if no categories are found
-                            echo '<option disabled>No categories found</option>';
-                        }
-                        ?>
-                    </select>
-
-                </div>
-                <!-- This is the button save -->
-                <div class="input-group mb-3 mt-4 itemName-input">
+        <form method="post" action="ajaxFiles/insertMerch.php" id="formSaveMerch">
+            <div class="row">
+                <div class="col">
                     <div class="container">
-                        <button type="button" class="btn btn-warning ml-5">
-                            <a href="inventoryPage.php" class="text-decoration-none text-dark">Save</a>
-                        </button>
+                        <div class="input-group mb-3 mt-5 itemName-input">
+                            <!-- Item Name -->
+                            <span class="input-group-text mt-3" id="inputGroup-sizing-default">Item Name</span>
+                            <input type="text" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemName" required>
+                        </div>
+                        <!-- Description -->
+                        <div class="input-group mb-3 mt-4 itemName-input">
+                            <span class="input-group-text mt-3" id="inputGroup-sizing-default">Description</span>
+                            <input type="text" class="form-control mt-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemDesc" required>
+                        </div>
+                        <!-- Size and Price -->
+                        <div class="input-group mb-3 mt-4 itemName-input">
+                            <span class="input-group-text mt-3 mb-3" id="inputGroup-sizing-default">Size</span>
+                            <input type="text" class="form-control mt-3 mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemSize" required>
+                            <span class="input-group-text mt-3 mb-3" id="inputGroup-sizing-default">Price</span>
+                            <input type="number" class="form-control mt-3 mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemPrice" required>
+                        </div>
+                        <!-- Category Selection -->
+                        <select name="category" class="form-select itemName-input" aria-label="Default select example" required>
+                            <option selected disabled>Choose a category</option>
+                            <?php
+                            require 'database.php';
+
+                            $query = "SELECT * FROM categoryTbl WHERE archive = 1";
+                            $query_run = mysqli_query($conn, $query);
+
+                            if (mysqli_num_rows($query_run) > 0) {
+                                while ($categoryList = mysqli_fetch_assoc($query_run)) {
+                                    echo '<option value="' . $categoryList['categoryID'] . '">' . $categoryList['categoryName'] . '</option>';
+                                }
+                            } else {
+                                echo '<option disabled>No categories found</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <!-- Save Button -->
+                    <div class="input-group mb-3 mt-4 itemName-input">
+                        <div class="container">
+                            <button type="submit" class="btn btn-warning ml-5">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image Preview -->
+                <div class="card mt-4 border border-black" style="width: 20rem;">
+                    <img src="https://i.pinimg.com/564x/95/5a/f7/955af7a2d19cc3cb70abb6d3e9a4c2ed.jpg" class="card-img-top mt-2" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Insert Description</p>
+                        <p class="card-text">Insert Price</p>
+                    </div>
+                    <!-- File Input -->
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupFile01">Choose Image</label>
+                        <input type="file" class="form-control" id="inputGroupFile01" name="itemImage">
                     </div>
                 </div>
             </div>
-            <div class="card mt-4 border border-black" style="width: 20rem;">
-                <img src="https://i.pinimg.com/564x/95/5a/f7/955af7a2d19cc3cb70abb6d3e9a4c2ed.jpg" class="card-img-top mt-2" alt="...">
-                <div class="card-body">
-                    <p class="card-text">Insert Description</p>
-                    <p class="card-text">Insert Price</p>
-                </div>
-                <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupFile01"></label>
-                    <input type="file" class="form-control" id="inputGroupFile01">
-                </div>
-            </div>
-        </div>
+        </form>
+
     </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // This handles adding merch to the database
+            $(document).on('submit', '#formSaveMerch', function(e) {
+                e.preventDefault();
+
+                var categoryID = $('select[name="category"]').val();
+                // Get form data
+                var formData = new FormData(this);
+                formData.append("addMerch", true);
+
+                // Send AJAX request
+                $.ajax({
+                    type: 'POST',
+                    url: 'ajaxFiles/insertMerch.php',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if (response.status === 'success') {
+                            location.reload();
+                            alert('Item Size: ' + response.itemSize);
+                        } else {
+                            console.error('Failed to add merch:', response.message);
+                            // Optionally provide feedback to the user
+                            alert('Failed to add merchandise: ' + response.message + '. Please try again.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX request failed:', error);
+                        // Optionally provide feedback to the user
+                        alert('An error occurred while adding merchandise. Please try again later.');
+                    }
+                });
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>

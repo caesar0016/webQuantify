@@ -18,8 +18,6 @@
         </button>
         <!--Add Extra Button if something to add-->
 
-
-
     </div>
     <!-- Button to add new items to the table, moved to the right with margin -->
     <button type="button" class="btn btn-outline-primary">
