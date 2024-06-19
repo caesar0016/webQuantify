@@ -75,13 +75,13 @@ include("database.php");
                 <div class="card mt-4 border border-black" style="width: 20rem;">
                     <img id="itemImagePreview" src="" class="card-img-top mt-2" alt="...">
                     <div class="card-body">
-                        <p class="card-text">Insert Description</p>
-                        <p class="card-text">Insert Price</p>
+                        <p class="card-text">This is an image description</p>
+                        <p class="card-text"><div class="h5 text-danger">350</div></p>
                     </div>
                     <!-- File Input -->
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupFile01"></label>
-                        <input type="file" class="form-control" id="inputGroupFile01" name="itemImage" accept=".jpg, .png, .jpeg" onchange="previewImage(event)">
+                        <input type="file" class="form-control" id="inputGroupFile01" name="itemImage" accept=".jpg, .png, .jpeg" onchange="previewImage(event)" required>
                     </div>
                 </div>
             </div>
@@ -108,21 +108,22 @@ include("database.php");
                     data: formData,
                     processData: false,
                     contentType: false,
-                    dataType: 'json',
+                    dataType: 'json', // Ensure we expect JSON data
                     success: function(response) {
                         console.log(response);
                         if (response.status === 'success') {
-                            location.reload();
-                            alert('Item Size: ' + response.itemSize);
+                            console.log(response);
+                            // Uncomment this line if you want to reload the page on success
+                            // location.reload();
+                            alert('Item successfully added.');
                         } else {
                             console.error('Failed to add merch:', response.message);
-                            // Optionally provide feedback to the user
                             alert('Failed to add merchandise: ' + response.message + '. Please try again.');
+                            console.log(response);
                         }
                     },
                     error: function(xhr, status, error) {
                         console.error('AJAX request failed:', error);
-                        // Optionally provide feedback to the user
                         alert('An error occurred while adding merchandise. Please try again later.');
                     }
                 });

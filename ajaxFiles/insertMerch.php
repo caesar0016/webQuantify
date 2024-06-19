@@ -24,7 +24,39 @@ if(isset($_POST['addMerch'])){
     $price = $_POST['itemPrice'];
     $category = $_POST['category'];
 
-    $query = "INSERT INTO merchTbl (itemName, description, size, price, categoryID) VALUES (?, ?, ?, ?, ?)";
+
+    $fileName = $_FILES["itemImage"]['name'];
+    $fileSize = $_FILES["itemImage"]['size'];
+    $tmpName = $_FILES["itemImage"]['tmp_name'];
+
+    $validImageExtension = ['jpg', 'jpeg', 'png'];
+    $imageExtension = explode('.', $fileName);
+    $imageExtension = strtolower(end($imageExtension));
+
+    if(!in_array($imageExtension, $validImageExtension)){
+        echo "<script> alert('Invalid Image Extension'); </script>";
+        exit(); // Stop script execution if invalid extension
+    }
+    else if($fileSize > 1000000){
+        echo "<script> alert('Image size is too large'); </script>";
+        exit(); // Stop script execution if image size is too large
+    }else{
+        $target_dir = "img/";
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0755, true); // Create the directory if it doesn't exist
+        }
+
+        $newImageName = uniqid() . '.' . $imageExtension;
+        $target_file = $target_dir . $newImageName;
+
+        if (!move_uploaded_file($tmpName, $target_file)) {
+            echo json_encode(array('status' => 'error', 'message' => 'Failed to upload image.'));
+            exit();
+        }
+    }
+
+    // Now insert data into the database
+    $query = "INSERT INTO merchTbl (itemName, description, size, price, categoryID, imagePath) VALUES (?, ?, ?, ?, ?, ?)";
     $statement = mysqli_prepare($conn, $query);
 
     if (!$statement) {
@@ -32,7 +64,7 @@ if(isset($_POST['addMerch'])){
         exit();
     }
 
-    mysqli_stmt_bind_param($statement, "sssdi", $itemName, $description, $size, $price, $category);
+    mysqli_stmt_bind_param($statement, "sssdis", $itemName, $description, $size, $price, $category, $newImageName);
 
     if(mysqli_stmt_execute($statement)) {
         $res['status'] = 'success';
