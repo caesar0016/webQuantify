@@ -190,40 +190,37 @@ $conn->close();
             });
 
             // Event listener for the delete button
-            $('#btnDeleteMerch').click(function(e) {
-                e.preventDefault();
+            // Event listener for the delete button
+    $('#btnDeleteMerch').click(function(e) {
+        e.preventDefault();
 
-                // Extract the merchID from the button or any other suitable place where you store it
-                var merchID = $('input[name="merchID"]').val();
+        // Extract the merchID from the button or any other suitable place where you store it
+        var merchID = $('input[name="merchID"]').val();
 
-                // Send AJAX request to deleteMerch.php
-                $.ajax({
-                    type: 'POST',
-                    url: 'ajaxFiles/insertMerch.php',
-                    data: {
-                        merchID: merchID
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            // Deletion successful, perform any necessary actions (e.g., page reload)
-                            alert('Item successfully deleted.');
-                            window.location.href = 'inventoryPage.php';
-                        } else {
-                            // // Deletion failed, inform the user
-                            // alert('Failed to delete item: ' + response.message);
-                            window.location.href = 'inventoryPage.php';
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        // // Error handling for AJAX request failure
-                        // console.error('AJAX request failed:', error);
-                        // alert('An error occurred while deleting the item. Please try again later.');
-                        window.location.href = 'inventoryPage.php';
-                    }
-                });
-            });
+        // Send AJAX request to insertMerch.php for archiving
+        $.ajax({
+            type: 'POST',
+            url: 'ajaxFiles/insertMerch.php',
+            data: {
+                archiveMerchID: merchID
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert('Item successfully archived.');
+                    window.location.href = 'inventoryPage.php';
+                } else {
+                    alert('Failed to archive item: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX request failed:', error);
+                alert('An error occurred while archiving the item. Please try again later.');
+            }
         });
+    });
+        });
+        
     </script>
 
     <script>

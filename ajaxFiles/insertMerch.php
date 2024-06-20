@@ -5,6 +5,7 @@ $db_pass = "";
 $db_name = "webquantify";
 $conn = "";
 
+// Establish database connection
 try {
     $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
     if (!$conn) {
@@ -15,8 +16,9 @@ try {
     exit(); // Ensure script stops if connection fails
 }
 
-if(isset($_POST['addMerch'])){
-    $res = []; //initialize the response array
+// Adding merchandise
+if (isset($_POST['addMerch'])) {
+    $res = []; // Initialize the response array
 
     $itemName = $_POST['itemName'];
     $description = $_POST['itemDesc'];
@@ -24,7 +26,6 @@ if(isset($_POST['addMerch'])){
     $price = $_POST['itemPrice'];
     $itemStock = $_POST['itemStock'];
     $category = $_POST['category'];
-
 
     $fileName = $_FILES["itemImage"]['name'];
     $fileSize = $_FILES["itemImage"]['size'];
@@ -34,14 +35,13 @@ if(isset($_POST['addMerch'])){
     $imageExtension = explode('.', $fileName);
     $imageExtension = strtolower(end($imageExtension));
 
-    if(!in_array($imageExtension, $validImageExtension)){
-        echo "<script> alert('Invalid Image Extension'); </script>";
+    if (!in_array($imageExtension, $validImageExtension)) {
+        echo json_encode(array('status' => 'error', 'message' => 'Invalid Image Extension'));
         exit(); // Stop script execution if invalid extension
-    }
-    else if($fileSize > 1000000){
-        echo "<script> alert('Image size is too large'); </script>";
+    } else if ($fileSize > 1000000) {
+        echo json_encode(array('status' => 'error', 'message' => 'Image size is too large'));
         exit(); // Stop script execution if image size is too large
-    }else{
+    } else {
         $target_dir = "img/";
         if (!is_dir($target_dir)) {
             mkdir($target_dir, 0755, true); // Create the directory if it doesn't exist
@@ -67,7 +67,7 @@ if(isset($_POST['addMerch'])){
 
     mysqli_stmt_bind_param($statement, "sssdiis", $itemName, $description, $size, $price, $itemStock, $category, $newImageName);
 
-    if(mysqli_stmt_execute($statement)) {
+    if (mysqli_stmt_execute($statement)) {
         $res['status'] = 'success';
     } else {
         $res['status'] = 'error';
@@ -78,60 +78,60 @@ if(isset($_POST['addMerch'])){
 
     mysqli_stmt_close($statement);
 }
-    if(isset($_POST['updateMerch'])){
-        // Receive the update data
-        $itemName = $_POST['itemName'];
-        $description = $_POST['itemDesc'];
-        $size = $_POST['itemSize'];
-        $price = $_POST['itemPrice'];
-        $itemStock = $_POST['itemStock'];
-        $category = $_POST['category'];
-        $merchID = $_POST['merchID']; // Assuming you pass merchID through URL or some hidden input in the form
 
-        // Validate the data (e.g., check for empty fields, validate numeric values, etc.)
+// Updating merchandise
+if (isset($_POST['updateMerch'])) {
+    // Receive the update data
+    $itemName = $_POST['itemName'];
+    $description = $_POST['itemDesc'];
+    $size = $_POST['itemSize'];
+    $price = $_POST['itemPrice'];
+    $itemStock = $_POST['itemStock'];
+    $category = $_POST['category'];
+    $merchID = $_POST['merchID']; // Assuming you pass merchID through URL or some hidden input in the form
 
-        // Update the database
-        $query = "UPDATE merchtbl SET itemName=?, description=?, size=?, price=?, stock=?, categoryID=? WHERE merchID=?";
-        $statement = mysqli_prepare($conn, $query);
+    // Validate the data (e.g., check for empty fields, validate numeric values, etc.)
 
-        if (!$statement) {
-            echo json_encode(array('status' => 'error', 'message' => 'Query preparation failed: ' . mysqli_error($conn)));
-            exit();
-        }
+    // Update the database
+    $query = "UPDATE merchtbl SET itemName=?, description=?, size=?, price=?, stock=?, categoryID=? WHERE merchID=?";
+    $statement = mysqli_prepare($conn, $query);
 
-        mysqli_stmt_bind_param($statement, "sssdiii", $itemName, $description, $size, $price, $itemStock, $category, $merchID);
-
-        if(mysqli_stmt_execute($statement)) {
-            $res['status'] = 'success';
-        } else {
-            $res['status'] = 'error';
-            $res['message'] = 'Execution failed: ' . mysqli_stmt_error($statement);
-        }
-
- 
+    if (!$statement) {
+        echo json_encode(array('status' => 'error', 'message' => 'Query preparation failed: ' . mysqli_error($conn)));
+        exit();
     }
 
-    if (isset($_POST['merchID']) && is_numeric($_POST['merchID'])) {
-        $merchID = (int)$_POST['merchID'];
-    
-        // Prepare and execute SQL UPDATE statement
-        $stmt = $conn->prepare("UPDATE merchtbl SET archiveFlag = 0 WHERE merchID = ?");
-        $stmt->bind_param("i", $merchID);
-    
-        if ($stmt->execute()) {
-            // Update successful
-            echo json_encode(array("status" => "success", "message" => "Item archived successfully."));
-        } else {
-            // Update failed
-            echo json_encode(array("status" => "error", "message" => "Failed to archive item."));
-        }
+    mysqli_stmt_bind_param($statement, "sssdiii", $itemName, $description, $size, $price, $itemStock, $category, $merchID);
+
+    if (mysqli_stmt_execute($statement)) {
+        echo json_encode(array('status' => 'success', 'message' => 'Item updated successfully.'));
     } else {
-        // Invalid request
-        echo json_encode(array("status" => "error", "message" => "Invalid request."));
+        echo json_encode(array('status' => 'error', 'message' => 'Execution failed: ' . mysqli_stmt_error($statement)));
     }
-    
-    
-    // Close database connection
-    $conn->close();
 
+    mysqli_stmt_close($statement);
+}
+
+// Archiving merchandise
+if (isset($_POST['archiveMerchID']) && is_numeric($_POST['archiveMerchID'])) {
+    $merchID = (int)$_POST['archiveMerchID'];
+
+    // Prepare and execute SQL UPDATE statement
+    $stmt = $conn->prepare("UPDATE merchtbl SET archiveFlag = 0 WHERE merchID = ?");
+    $stmt->bind_param("i", $merchID);
+
+    if ($stmt->execute()) {
+        echo json_encode(array("status" => "success", "message" => "Item archived successfully."));
+    } else {
+        echo json_encode(array("status" => "error", "message" => "Failed to archive item."));
+    }
+
+    $stmt->close();
+} else {
+    // Invalid request
+    echo json_encode(array("status" => "error", "message" => "Invalid request."));
+}
+
+// Close database connection
+$conn->close();
 ?>
