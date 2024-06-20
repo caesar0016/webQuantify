@@ -182,8 +182,9 @@ $conn->close();
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.error('AJAX request failed:', error);
-                        alert('An error occurred while adding merchandise. Please try again later.');
+                        window.location.href = 'inventoryPage.php';
+                        // console.error('AJAX request failed:', error);
+                        // alert('An error occurred while adding merchandise. Please try again later.');
                     }
                 });
             });
@@ -209,14 +210,16 @@ $conn->close();
                             alert('Item successfully deleted.');
                             window.location.href = 'inventoryPage.php';
                         } else {
-                            // Deletion failed, inform the user
-                            alert('Failed to delete item: ' + response.message);
+                            // // Deletion failed, inform the user
+                            // alert('Failed to delete item: ' + response.message);
+                            window.location.href = 'inventoryPage.php';
                         }
                     },
                     error: function(xhr, status, error) {
-                        // Error handling for AJAX request failure
-                        console.error('AJAX request failed:', error);
-                        alert('An error occurred while deleting the item. Please try again later.');
+                        // // Error handling for AJAX request failure
+                        // console.error('AJAX request failed:', error);
+                        // alert('An error occurred while deleting the item. Please try again later.');
+                        window.location.href = 'inventoryPage.php';
                     }
                 });
             });

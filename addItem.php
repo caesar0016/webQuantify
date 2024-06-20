@@ -125,11 +125,13 @@ include("database.php");
                             // console.error('Failed to add merch:', response.message);
                             // alert('Failed to add merchandise: ' + response.message + '. Please try again.');
                             // console.log(response);
+                            window.location.href = 'inventoryPage.php';
                         }
                     },
                     error: function(xhr, status, error) {
                         // console.error('AJAX request failed:', error);
                         // alert('An error occurred while adding merchandise. Please try again later.');
+                        window.location.href = 'inventoryPage.php';
                     }
                 });
             });

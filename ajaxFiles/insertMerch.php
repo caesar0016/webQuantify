@@ -114,21 +114,22 @@ if(isset($_POST['addMerch'])){
     if (isset($_POST['merchID']) && is_numeric($_POST['merchID'])) {
         $merchID = (int)$_POST['merchID'];
     
-        // Prepare and execute SQL DELETE statement
-        $stmt = $conn->prepare("DELETE FROM merchtbl WHERE merchID = ?");
+        // Prepare and execute SQL UPDATE statement
+        $stmt = $conn->prepare("UPDATE merchtbl SET archiveFlag = 0 WHERE merchID = ?");
         $stmt->bind_param("i", $merchID);
     
         if ($stmt->execute()) {
-            // Deletion successful
-            echo json_encode(array("status" => "success", "message" => "Item deleted successfully."));
+            // Update successful
+            echo json_encode(array("status" => "success", "message" => "Item archived successfully."));
         } else {
-            // Deletion failed
-            echo json_encode(array("status" => "error", "message" => "Failed to delete item."));
+            // Update failed
+            echo json_encode(array("status" => "error", "message" => "Failed to archive item."));
         }
     } else {
         // Invalid request
         echo json_encode(array("status" => "error", "message" => "Invalid request."));
     }
+    
     
     // Close database connection
     $conn->close();
