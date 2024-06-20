@@ -16,9 +16,9 @@ include("database.php");
     <table class="table table-secondary mt-4">
         <thead>
             <tr>
-                <th scope="col"><a href="#" class="text-dark text-decoration-none">BUSSINESS AND MANAGEMENT</a></th>
+                <th scope="col"><a href="businessClick.php" class="text-dark text-decoration-none">BUSSINESS AND MANAGEMENT</a></th>
                 <th scope="col"><a href="#" class="text-dark text-decoration-none">ARTS AND SCIENCES</a></th>
-                <th scope="col"><a href="#" class="text-dark text-decoration-none">IT AND ENGINEERING</a></th>
+                <th scope="col"><a href="bsitAndEngineering.php" class="text-dark text-decoration-none">IT AND ENGINEERING</a></th>
                 <th scope="col"><a href="#" class="text-dark text-decoration-none">TOURISM AND MANAGEMENT</a></th>
                 <th scope="col"><a href="#" class="text-dark text-decoration-none">HOSPITALITY AND MANAGEMENT</a></th>
                 <th scope="col"><a href="#" class="text-dark text-decoration-none">HIGH SCHOOL</a></th>
