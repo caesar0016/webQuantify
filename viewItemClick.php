@@ -5,11 +5,12 @@ include("database.php");
 // Validate and sanitize the merchID parameter
 if (isset($_GET['merchID']) && is_numeric($_GET['merchID'])) {
     $merch_id = mysqli_real_escape_string($conn, $_GET['merchID']);
-
+    $merchName = mysqli_real_escape_string($conn, $_GET['itemName']);
     // Proceed with your logic
     // For example, perform a database query using the sanitized $merch_id
     $query = "SELECT * FROM merchTbl WHERE merchID = '$merch_id'";
     $query_run = mysqli_query($conn, $query);
+   // echo $merchName;
 
     // Rest of your code...
 } else {
@@ -31,7 +32,7 @@ if (isset($_GET['merchID']) && is_numeric($_GET['merchID'])) {
 <body class="light">
     <div class="container-fluid text-center mt-4">
         <div class="row justify-content-center">
-            <div class="col-5 ">
+            <div class="col-3 ">
                 <!-- start of card -->
                 <?php
                 $query = "Select * from merchTbl where merchID = '$merch_id'";
@@ -44,15 +45,17 @@ if (isset($_GET['merchID']) && is_numeric($_GET['merchID'])) {
                         $merchDesc = $merchList1['description'];
                         $price = $merchList1['price'];
                         $stock = $merchList1['stock'];
+                        $size = $merchList1['size'];
 
                         // <img src="img/' . ($imagePath) . '" class="card-img-top" alt="Item Image">
                         echo '
-                                <div class="card mx-auto border border-dark border-3" style="width: 20rem;">
+                                <div class="card mx-auto border border-dark border-3 mt-5" style="width: 20rem;">
                                     <img src="ajaxFiles/img/' . $imagePath1 . '" class="card-img-top" alt="Item Image">
                                     <div class="card-body text-center" style="width: 50%; margin: auto;">
                                         <p class="card-text">' . htmlspecialchars($merchName) . '</p>
                                         <p class="card-text">' . htmlspecialchars($merchDesc) . '</p>
                                         <p class="card-text text-danger">P' . htmlspecialchars($price) . '</p>
+                                        <p class="card-text">Size: ' . htmlspecialchars($size) . '</p>
                                         <p class="card-text">Stock: ' . htmlspecialchars($stock) . '</p>
                                     </div>
                                 </div>
@@ -64,27 +67,23 @@ if (isset($_GET['merchID']) && is_numeric($_GET['merchID'])) {
                 <!-- end of card -->
             </div>
             <div class="col-3 text-center mt-5">
-                <!-- Example single danger button -->
-                <div class="btn-group mt-5">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Select Size
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div><br>
-                <div class="btn-group mt-5" role="group" aria-label="Basic outlined example"> <!--Button group for increaseing the qty-->
-                    <button type="button" class="btn btn-outline-primary">
-                        <img src="images/ic_minus.png" alt="Edit">
-                    </button>
-                    <input type="text" class="col-3 text-center border-primary mx-2">
-                    <button type="button" class="btn btn-outline-primary">
-                        <img src="images/ic_add.png" alt="Edit">
-                    </button>
-                </div>
-                <button type="button" class="btn btn-secondary mt-5">Reserve</button>
+                <!-- This is the middle part -->
+                 <form action="" method="post">
+
+                     <div class="h3">Name</div>
+                 <input class="form-control" type="text" placeholder="Name" aria-label="default input example" name="clientName" required>
+                     <br>
+                     <div class="btn-group mt-5" role="group" aria-label="Basic outlined example"> <!--Button group for increaseing the qty-->
+                         <button type="button" class="btn btn-outline-primary" id="btnDecrement">
+                             <img src="images/ic_minus.png" alt="minusPictures">
+                         </button>
+                         <input type="text" class="col-3 text-center border-primary mx-2" required>
+                         <button type="button" class="btn btn-outline-primary" id="btnIncrement">
+                             <img src="images/ic_add.png" alt="IncementPicture">
+                         </button>
+                     </div>
+                     <button id="btnReserve" type="submit" class="btn btn-secondary mt-5">Reserve</button>
+                 </form>
             </div>
             <div class="col-4">
                 <h1>Pickup Date</h1><br>

@@ -34,21 +34,21 @@ include("database.php");
             </div>
             <div class="col">
                 <div class="row">
-                    <?php
-                    require 'database.php';
-                    $query = "SELECT * FROM merchTbl";
-                    $query_run = mysqli_query($conn, $query);
+                <?php
+require 'database.php';
+$query = "SELECT * FROM merchTbl";
+$query_run = mysqli_query($conn, $query);
 
-                    if (mysqli_num_rows($query_run) > 0) {
-                        while ($merchList = mysqli_fetch_assoc($query_run)) {
-                            $merchID = $merchList['merchID']; // Assuming 'merchID' is the column name in your database
-                            $imagePath = $merchList['imagePath']; // Assuming 'imagePath' is the column name in your database
-                            $price = $merchList['price']; // Assuming 'price' is the column name in your database
-                            $description = $merchList['description']; // Assuming 'description' is the column name in your database
-                            $itemName = $merchList['itemName']; // Assuming 'itemName' is the column name in your database
+if (mysqli_num_rows($query_run) > 0) {
+    while ($merchList = mysqli_fetch_assoc($query_run)) {
+        $merchID = $merchList['merchID']; // Assuming 'merchID' is the column name in your database
+        $imagePath = $merchList['imagePath']; // Assuming 'imagePath' is the column name in your database
+        $price = $merchList['price']; // Assuming 'price' is the column name in your database
+        $description = $merchList['description']; // Assuming 'description' is the column name in your database
+        $itemName = $merchList['itemName']; // Assuming 'itemName' is the column name in your database
 
-                            echo '<div class="col-md-6 mb-4">
-            <a href="viewItemClick.php?merchID=' . htmlspecialchars($merchID) . '" class="text-decoration-none text-dark">
+        echo '<div class="col-md-6 mb-4">
+            <a href="viewItemClick.php?merchID=' . htmlspecialchars($merchID) . '&itemName=' . urlencode(htmlspecialchars($itemName)) . '" class="text-decoration-none text-dark">
                 <div class="card">
                     <img src="ajaxFiles/img/' . htmlspecialchars($imagePath) . '" class="card-img-top" alt="Item Image">
                     <div class="card-body">
@@ -59,11 +59,12 @@ include("database.php");
                 </div>
             </a>
         </div>';
-                        }
-                    } else {
-                        echo '<p class="text-center">No merchandise found.</p>';
-                    }
-                    ?>
+    }
+} else {
+    echo '<p class="text-center">No merchandise found.</p>';
+}
+?>
+
 
                 </div>
 
