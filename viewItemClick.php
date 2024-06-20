@@ -68,21 +68,14 @@ if (isset($_GET['merchID']) && is_numeric($_GET['merchID'])) {
             </div>
             <div class="col-3 text-center mt-5">
                 <!-- This is the middle part -->
-                 <form action="" method="post">
-
+                 <form action="" method="post" autocomplete="off">
                      <div class="h3">Name</div>
                  <input class="form-control" type="text" placeholder="Name" aria-label="default input example" name="clientName" required>
                      <br>
-                     <div class="btn-group mt-5" role="group" aria-label="Basic outlined example"> <!--Button group for increaseing the qty-->
-                         <button type="button" class="btn btn-outline-primary" id="btnDecrement">
-                             <img src="images/ic_minus.png" alt="minusPictures">
-                         </button>
-                         <input type="text" class="col-3 text-center border-primary mx-2" required>
-                         <button type="button" class="btn btn-outline-primary" id="btnIncrement">
-                             <img src="images/ic_add.png" alt="IncementPicture">
-                         </button>
-                     </div>
-                     <button id="btnReserve" type="submit" class="btn btn-secondary mt-5">Reserve</button>
+                     <div class="h3">Qty</div>
+                     <input class="form-control" id="inputQty" type="number" placeholder="qty" aria-label="default input example" name="inputQty" required min="1" pattern="\d+">
+                        
+                         <button id="btnReserve" type="submit" class="btn btn-primary mt-5">Reserve</button>
                  </form>
             </div>
             <div class="col-4">
