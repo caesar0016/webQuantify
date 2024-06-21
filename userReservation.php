@@ -32,6 +32,8 @@
             <tr class="table-primary">
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Item</th>
+                <th scope="col">Qty</th>
                 <th scope="col">Status</th>
                 <th scope="col">Date</th>
                 <th scope="col"></th>
@@ -40,13 +42,23 @@
         </thead>
         <tbody>
             <?php
-            $query = "SELECT * FROM reservationtbl";
+            $query = "SELECT 
+                        r.reservationID,
+                        r.customerName,
+                        m.itemName,
+                        r.qty,
+                        r.status
+                    FROM reservationtbl AS r
+                    LEFT JOIN merchtbl AS m
+                    ON r.merchID = m.merchID;";
             $query_run = mysqli_query($conn, $query);
 
             if(mysqli_num_rows($query_run) > 0){
                 while($reserveList = mysqli_fetch_assoc($query_run)){
                     $id = $reserveList['reservationID'];
                     $customer = $reserveList['customerName'];
+                    $itemName = $reserveList['itemName'];
+                    $qty = $reserveList['qty'];
                     $status = $reserveList['status'];
                  //   $date = $reserveList['date'];
                     
@@ -54,6 +66,8 @@
                         <tr>
                             <th scope="row">' . $id . '</th>
                             <td>' . $customer . '</td>
+                            <td>' . $itemName . '</td>
+                            <td>' . $qty . '</td>
                             <td>' . $status . '</td>
                             <td>Date</td>
                             <td class="">

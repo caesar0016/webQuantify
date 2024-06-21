@@ -45,6 +45,7 @@ if (mysqli_num_rows($query_run) > 0) {
         $imagePath = $merchList['imagePath']; // Assuming 'imagePath' is the column name in your database
         $price = $merchList['price']; // Assuming 'price' is the column name in your database
         $description = $merchList['description']; // Assuming 'description' is the column name in your database
+        $size = $merchList['size']; // Assuming 'description' is the column name in your database
         $itemName = $merchList['itemName']; // Assuming 'itemName' is the column name in your database
 
         echo '<div class="col-md-6 mb-4">
@@ -54,6 +55,7 @@ if (mysqli_num_rows($query_run) > 0) {
                     <div class="card-body">
                         <h5 class="card-title">' . htmlspecialchars($itemName) . '</h5>
                         <p class="card-text">' . htmlspecialchars($description) . '</p>
+                        <p class="card-text">Size: ' . htmlspecialchars($size) . '</p>
                         <p class="card-text text-danger">P' . htmlspecialchars($price) . '</p>
                     </div>
                 </div>

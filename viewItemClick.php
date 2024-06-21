@@ -69,9 +69,9 @@ if (isset($_GET['merchID']) && is_numeric($_GET['merchID'])) {
             <div class="col-3 text-center mt-5">
                 <!-- This is the middle part -->
                  <form action="ajaxFiles/insertReserves.php" method="post" autocomplete="off" id="reservationForm">
-                 <input type="text" value="<?php echo $merch_id; ?>" hidden id="viewItemMerchID">    
-                 <div class="h3">Name</div>
-                 <input class="form-control" type="text" placeholder="Name" aria-label="default input example" name="clientName" required>
+                     <div class="h3">Name</div>
+                     <input type="text" value="<?php echo $merch_id; ?>" hidden id="viewItemMerchID">    
+                     <input class="form-control" type="text" placeholder="Name" aria-label="default input example" name="clientName" required>
                      <br>
                      <div class="h4">Date</div>
                      <input id="selected-date" name="viewItemSelectedDate" value="" type="date" min="<?php echo date('Y-m-d'); ?>">
