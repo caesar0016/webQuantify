@@ -68,10 +68,13 @@ if (isset($_GET['merchID']) && is_numeric($_GET['merchID'])) {
             </div>
             <div class="col-3 text-center mt-5">
                 <!-- This is the middle part -->
-                 <form action="" method="post" autocomplete="off">
-                     <div class="h3">Name</div>
+                 <form action="ajaxFiles/insertReserves.php" method="post" autocomplete="off" id="reservationForm">
+                 <input type="text" value="<?php echo $merch_id; ?>" hidden id="viewItemMerchID">    
+                 <div class="h3">Name</div>
                  <input class="form-control" type="text" placeholder="Name" aria-label="default input example" name="clientName" required>
                      <br>
+                     <div class="h4">Date</div>
+                     <input id="selected-date" name="viewItemSelectedDate" value="" type="date" min="<?php echo date('Y-m-d'); ?>">
                      <div class="h3">Qty</div>
                      <input class="form-control" id="inputQty" type="number" placeholder="qty" aria-label="default input example" name="inputQty" required min="1" pattern="\d+">
                         
@@ -137,6 +140,49 @@ if (isset($_GET['merchID']) && is_numeric($_GET['merchID'])) {
         </div>
     </div>
     <script src="jsFiles/viewItemClick.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+    $(document).ready(function () {
+    $('#reservationForm').on('submit', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        var formData = new FormData(this);
+        formData.append("addReserve", true);
+
+        $.ajax({
+            type: 'POST',
+            url: 'ajaxFiles/insertReserves.php',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response){
+                console.log('AJAX success:', response); // Log the AJAX response
+                try {
+                    response = JSON.parse(response); // Parse JSON response
+                    if (response.status === 'success') {
+                        console.log('Reservation successful:', response);
+                        // Uncomment this line if you want to reload the page on success
+                        // window.location.href = 'bsitAndEngineering.php';
+                        alert('Item successfully added.');
+                    } else {
+                        console.error('Failed to add merch:', response.message);
+                        alert('Failed to add merchandise: ' + response.message + '. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Failed to parse JSON:', error);
+                    alert('Failed to parse server response. Please try again later.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX request failed:', error);
+                alert('An error occurred while adding merchandise. Please try again later.');
+            }
+        });
+    });
+});
+
+</script>
+
 </body>
 
 </html>

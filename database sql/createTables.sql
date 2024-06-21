@@ -1,7 +1,8 @@
 create table reservationTbl(
-	reservationID int primary key,
+	reservationID int primary key auto_increment,
     merchID int,
-    customerID int,
+    userID int,
+    customerName varchar(45),
     reservationDate date,
     qty int,
     status varchar(45) DEFAULT 'To Pay',
@@ -30,3 +31,7 @@ create table categoryTbl(
 --This is the alter table side
 alter table merchtbl
 AUTO_INCREMENT 20;
+
+--Alter for adding a foreign key
+ALTER TABLE merchtbl
+ADD FOREIGN KEY (categoryID) REFERENCES categorytbl(categoryID);
