@@ -162,8 +162,8 @@ if (isset($_GET['merchID']) && is_numeric($_GET['merchID'])) {
                     if (response.status === 'success') {
                         console.log('Reservation successful:', response);
                         // Uncomment this line if you want to reload the page on success
-                        // window.location.href = 'bsitAndEngineering.php';
-                        alert('Item successfully added.');
+                        alert('Reservation successful.');
+                        window.location.href = 'bsitAndEngineering.php';
                     } else {
                         console.error('Failed to add merch:', response.message);
                         alert('Failed to add merchandise: ' + response.message + '. Please try again.');

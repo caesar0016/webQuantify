@@ -1,5 +1,6 @@
 <?php
     include("header.html");
+    include("database.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,65 +29,49 @@
     </div>
     <table class="table table-striped table-hover">
         <thead>
-        <tr class="table-primary">
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Status</th>
-            <th scope="col">Pickup Date</th>
-            <th scope="col">Receipt</th>
-            <th scope="col"></th>
-        </tr>
+            <tr class="table-primary">
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
         </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Jonathan</td>
-            <td>Pending</td>
-            <td>June 4, 2024</td>
-            <td class="">
-                <a href="#" class="btn" role="button">
-                    <img src="images/ic_receipt.png" alt="Edit">
-                </a>
-            </td>
-            <td class="">
-                <a href="#" class="btn" role="button">
-                    <img src="images/ic_edit.png" alt="Edit">
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jane Miranda</td>
-            <td>Pending</td>
-            <td>June 25, 2024</td>
-            <td class="">
-                <a href="#" class="btn" role="button">
-                    <img src="images/ic_receipt.png" alt="Edit">
-                </a>
-            </td>
-            <td class="">
-                <a href="#" class="btn" role="button">
-                    <img src="images/ic_edit.png" alt="Edit">
-                </a>
-            </td>
-            
-        </tr>
-        <tr>
-            <th scope="row">4</th>
-            <td >Peter</td>
-            <td>Pending</td>
-            <td>June 30, 2024</td>
-            <td class="">
-                <a href="#" class="btn" role="button">
-                    <img src="images/ic_receipt.png" alt="Edit">
-                </a>
-            </td>
-            <td class="">
-                <a href="#" class="btn" role="button">
-                    <img src="images/ic_edit.png" alt="Edit">
-                </a>
-            </td>
-        </tr>
-  </tbody>
+        <tbody>
+            <?php
+            $query = "SELECT * FROM reservationtbl";
+            $query_run = mysqli_query($conn, $query);
+
+            if(mysqli_num_rows($query_run) > 0){
+                while($reserveList = mysqli_fetch_assoc($query_run)){
+                    $id = $reserveList['reservationID'];
+                    $customer = $reserveList['customerName'];
+                    $status = $reserveList['status'];
+                 //   $date = $reserveList['date'];
+                    
+                    echo '
+                        <tr>
+                            <th scope="row">' . $id . '</th>
+                            <td>' . $customer . '</td>
+                            <td>' . $status . '</td>
+                            <td>Date</td>
+                            <td class="">
+                                <a href="#" class="btn btn-primary" role="button">
+                                    <img src="images/ic_receipt.png" alt="Receipt">
+                                </a>
+                            </td>
+                            <td class="">
+                                <a href="#" class="btn btn-primary" role="button">
+                                    <img src="images/ic_edit.png" alt="Edit">
+                                </a>
+                            </td>
+                        </tr>
+                    ';
+                }
+            }
+            ?>
+        </tbody>
+    </table>
 </body>
 </html>
