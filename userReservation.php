@@ -47,7 +47,7 @@
                         r.customerName,
                         m.itemName,
                         r.qty,
-                        r.status
+                        r.paymentStatus
                     FROM reservationtbl AS r
                     LEFT JOIN merchtbl AS m
                     ON r.merchID = m.merchID;";
@@ -59,7 +59,7 @@
                     $customer = $reserveList['customerName'];
                     $itemName = $reserveList['itemName'];
                     $qty = $reserveList['qty'];
-                    $status = $reserveList['status'];
+                    $status = $reserveList['paymentStatus'];
                  //   $date = $reserveList['date'];
                     
                     echo '

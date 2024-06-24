@@ -5,7 +5,6 @@ create table reservationTbl(
     customerName varchar(45),
     reservationDate date,
     qty int,
-    status varchar(45) DEFAULT 'To Pay',
     paymentStatus varchar(30) DEFAULT 'Pending',
     archiveFlag int DEFAULT 1
 );
